@@ -9,9 +9,9 @@ let root = document.getElementById('root');
 /**
  * Create header and main
  */
-let header = document.createElement('header');
+let header = document.createElement('div');
 header.style.width = '100%';
-header.style.backgroundColor = '#afa';
+//header.style.backgroundColor = '#afa';
 root.appendChild(header);
 let main = document.createElement('main');
 root.appendChild(header);
@@ -101,16 +101,16 @@ let menuItem = (inner) => {
         padding: '20px 25px',
         fontWeight: 'bold',
         fontFamily: 'Arial',
+        color: '#61656f',
     });
     return output;
 }
 let createHeader = (header) => {
-    header.display = 'flex';
     let logoTopInfo = document.createElement('div');
     Object.assign(logoTopInfo.style, {
         width: '1170px',
         maxWidth: '100%',
-        height: '40%',
+        height: '60px',
         marginLeft: 'auto',
         marginRight: 'auto',
         display: 'flex',
@@ -132,14 +132,14 @@ let createHeader = (header) => {
     ]);
 
     let navbar = document.createElement('nav');
-    let menu = document.createElement('ul');
+    navbar.style.backgroundColor = '#f4f5f8';
+    navbar.style.display = 'flex';
+    let menu = document.createElement('div');
     Object.assign(menu.style, {
         width: '1170px',
         maxWidth: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
-        height: '40%',
-        backgroundColor: 'purple',
         display: 'flex',
         listStyleType: 'none',
     });
@@ -160,24 +160,28 @@ let createHomeSlider = (section) => {
     section.style.position = 'relative';
     let backgroundImage = document.createElement('img')
     backgroundImage.src = sliderBackgroundImage;
-    backgroundImage.style.width = '100%';
-    backgroundImage.style.height = 'auto';
-    backgroundImage.style.filter = 'brightness(60%)';
+    Object.assign(backgroundImage.style, {
+        width: '100%',
+        height: 'auto',
+        filter: 'brightness(60%)',
+    });
     let overlay = document.createElement('div');
     let bigText = document.createElement('h2');
     let smallText = document.createElement('p');
     let button = document.createElement('button');
-    overlay.style.position = 'absolute';
-    overlay.style.top = '50%';
-    overlay.style.left = '0%'
-    overlay.style.width = '100%';
-    overlay.style.tranform = 'translate(0%, -50%)';
-    overlay.style.display = 'flex';
-    overlay.style.justifyContent = 'center';
-    overlay.style.alignItems = 'center';
-    overlay.style.color = 'white';
-    overlay.style.flexDirection = 'column';
-    overlay.style.fontFamily = 'Arial';
+    Object.assign(overlay.style, {
+        position: 'absolute',
+        top: '50%',
+        left: '0%',
+        width: '100%',
+        transform: 'translate(0%, -50%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        flexDirection: 'column',
+        fontFamily: 'Arial',
+    });
     bigText.innerText = 'Slider Header';
     bigText.style.fontSize = '50px';
     bigText.margin = '0 0 30px';
