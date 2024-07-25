@@ -7,15 +7,75 @@
 let root = document.getElementById('root');
 
 /**
+ * Generic helper functions
+ */
+
+let setChildren = (parentElement, children) => {
+    for(child of children) parentElement.appendChild(child);
+}
+
+let createContainer = (type, ...styles) => {
+    let output = document.createElement(type);
+    for(let style of styles) {
+        Object.assign(output.style, style);
+    }
+    return output;
+}
+
+let createText = (type, text, ...styles) => {
+    output = createContainer(type, ...styles);
+    output.innerHTML = text;
+    return output;
+}
+
+let createImage = (src, ...styles) => {
+    output = document.createElement('img');
+    output.src = src;
+    for(style of styles) Object.assign(output.style, style);
+    return output;
+}
+
+let createButton = (inner, ...styles) => {
+    output = createContainer('div', ...styles);
+    output.innerHTML = inner;
+    return output;
+}
+
+let buttonDefault = {
+    backgroundColor: '#ffda44',
+    fontSize: '20px',
+    color: '#4c443a',
+    fontWeight: 'bold',
+    font: 'Arial',
+    padding: '15px 40px', 
+    borderRadius: '3px',
+    textAlign: 'center',
+}
+
+let hSpace = (width) => {
+    let output = createContainer('div', {width: width});
+    return output;
+}
+
+let centered = {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+};
+
+let expandingDiv = () => {
+    let output = createContainer('div', centered);
+    return output;
+}
+/**
  * Create header and main
  */
-let header = document.createElement('div');
-header.style.width = '100%';
-//header.style.backgroundColor = '#afa';
-root.appendChild(header);
+
+let header = createContainer('div', {
+    width: '100%',
+});
 let main = document.createElement('main');
-root.appendChild(header);
-root.appendChild(main);
+let footer = document.createElement('footer');
+setChildren(root, [header, main, footer]);
 
 /**
  * Create all the sections
@@ -23,83 +83,58 @@ root.appendChild(main);
 let sectionCounter = 0;
 let makeSection = () => {
     sectionCounter++;
-    let output = document.createElement('section');
-    output.style.width = '100%'
-    output.style.minHeight = '15dvh'
-    if(sectionCounter & 1) output.style.backgroundColor = 'lightgray';
-    else output.style.backgroundColor = 'darkgray';
+    let backgroundColor = sectionCounter & 1 ? 'lightgray' : 'darkgray';
+    let output = createContainer('section', {
+        width: '100%',
+        minHeight: '15dvh',
+        backgroundColor: backgroundColor,
+    });
     return output;
 }
 
 let [homeSlider, homeCompany, homeCeo, homeServices, homeLinks, homeProcess, homeStats, homeServicesOther, homeTestimonials, homePublications, homeNews, homePartners] = Array.from({length: 12}, (_, i) => {return makeSection()});
 
-for(child of [homeSlider, homeCompany, homeCeo, homeServices, homeLinks, homeProcess, homeStats, homeServicesOther, homeTestimonials, homePublications, homeNews, homePartners]) {
-    main.appendChild(child);
-}
 
-let footer = document.createElement('div');
-main.appendChild(footer);
+setChildren(main, [
+    homeSlider, homeCompany, homeCeo, homeServices, homeLinks, homeProcess,
+    homeStats, homeServicesOther, homeTestimonials, homePublications, homeNews,
+    homePartners,
+]);
 
 /**
  * Header section
  */
 
-let setChildren = (parentElement, children) => {
-    for(child of children) parentElement.appendChild(child);
-}
-
-let expandingDiv = () => {
-    let output = document.createElement('div');
-    output.style.marginLeft = 'auto';
-    output.style.marginRight = 'auto';
-    return output;
-}
-
-let hSpace = (width) => {
-    let output = document.createElement('div');
-    output.style.width = width;
-    return output;
-}
-
 let contactCard = (header, descriptor) => {
-    let output = document.createElement('div');
-    let headerText = document.createElement('div');
-    headerText.innerHTML = header;
-    Object.assign(headerText.style, {
+    let output = createContainer('div', {
+        padding: '0 20px'
+    });
+    let headerText = createText('div', header, {
         color: '#093eb6',
         fontWeight: 'bold',
         marginBottom: '20px',
         fontSize: '15px',
         fontFamily: 'Arial',
     });
-    let headerDescriptor = document.createElement('div');
-    headerDescriptor.innerHTML = descriptor;
-    Object.assign(headerDescriptor.style, {
+    let headerDescriptor = createText('div', descriptor, {
         color: '#76797f',
         fontSize: '15px',
         margin: '0 0 10px',
         fontFamily: 'Arial',
     });
-    output.appendChild(headerText);
-    output.appendChild(headerDescriptor);
-    output.style.padding = '0 20px';
-    output.height = '100%';
+    setChildren(output, [headerText, headerDescriptor]);
     return output;
 }
 
 let tallImg = (src) => {
-    let output = document.createElement('img');
-    output.src = src;
-    console.log(src);
-    output.style.height = '100%';
-    output.style.width = 'auto';
-    return output;
+    return createImage(src, {
+        height: '100%',
+        width: 'auto',
+    });
 }
 
 let menuItem = (inner) => {
-    let output = document.createElement('li');
-    output.innerHTML = inner;
-    Object.assign(output.style, {
+    let output = createText('li', inner, {
         fontSize: '15px',
         padding: '20px 25px',
         fontWeight: 'bold',
@@ -108,9 +143,9 @@ let menuItem = (inner) => {
     });
     return output;
 }
+
 let createHeader = (header) => {
-    let logoTopInfo = document.createElement('div');
-    Object.assign(logoTopInfo.style, {
+    logoTopInfo = createContainer('div', {
         width: '1170px',
         maxWidth: '100%',
         height: '60px',
@@ -119,8 +154,9 @@ let createHeader = (header) => {
         display: 'flex',
         padding: '25px 0',
     });
-    let contact = document.createElement('div');
-    contact.style.display = 'flex';
+    let contact = createContainer('div', {
+        display: 'flex',
+    });
     let call = contactCard('CALL US', '1800 425 4646');
     let email = contactCard('EMAIL US', 'info@offshoreinsustry.com');
     let market = contactCard('MARKET', '256.78 (+4.26)');
@@ -133,12 +169,11 @@ let createHeader = (header) => {
     setChildren(logoTopInfo, [
         tallImg(logo), expandingDiv(), contact
     ]);
-
-    let navbar = document.createElement('nav');
-    navbar.style.backgroundColor = '#f4f5f8';
-    navbar.style.display = 'flex';
-    let menu = document.createElement('div');
-    Object.assign(menu.style, {
+    let navbar = createContainer('nav', {
+        backgroundColor: '#f4f5f8',
+        display: 'flex',
+    });
+    let menu = createContainer('div', {
         width: '1170px',
         maxWidth: '100%',
         marginLeft: 'auto',
@@ -161,18 +196,12 @@ createHeader(header);
  */
 let createHomeSlider = (section) => {
     section.style.position = 'relative';
-    let backgroundImage = document.createElement('img')
-    backgroundImage.src = sliderBackgroundImage;
-    Object.assign(backgroundImage.style, {
+    let backgroundImage = createImage(sliderBackgroundImage, {
         width: '100%',
         height: 'auto',
         filter: 'brightness(60%)',
     });
-    let overlay = document.createElement('div');
-    let bigText = document.createElement('h2');
-    let smallText = document.createElement('p');
-    let button = document.createElement('button');
-    Object.assign(overlay.style, {
+    let overlay = createContainer('div', {
         position: 'absolute',
         top: '50%',
         left: '0%',
@@ -185,19 +214,17 @@ let createHomeSlider = (section) => {
         flexDirection: 'column',
         fontFamily: 'Arial',
     });
-    bigText.innerText = 'Slider Header';
-    bigText.style.fontSize = '50px';
-    bigText.margin = '0 0 30px';
-    smallText.innerText = 'slider description';
-    smallText.style.fontSize = '20px';
-    smallText.style.margin = '0 0 40px';
-    button.innerText = 'Know More';
-    button.style.padding = '20px';
-    button.style.fontSize = '20px';
-    button.style.backgroundColor = '#ffda44';
-    for(child of [bigText, smallText, button]) overlay.appendChild(child);
-    section.appendChild(backgroundImage);
-    section.appendChild(overlay);
+    let bigText = createText('h2', 'Slider Header', {
+        fontSize: '50px',
+        margin: '0 0 30px',
+    });
+    let smallText = createText('p', 'slider description', {
+        fontSize: '20px',
+        margin: '0 0 40px',
+    });
+    let button = createButton('Know More', buttonDefault);
+    setChildren(overlay, [bigText, smallText, button]);
+    setChildren(section, [backgroundImage, overlay]);
 }
 
 createHomeSlider(homeSlider);
@@ -206,25 +233,17 @@ createHomeSlider(homeSlider);
  * Create footer
  */
 
-let textBlock = (type, text, ...styles) => {
-    let output = document.createElement(type);
-    output.innerText = text;
-    for(style of styles) Object.assign(output.style, style);
-    return output;
-}
-
 let prefooterBlock = (color, title, description) => {
-    let output = document.createElement('div');
-    Object.assign(output.style, {
+    let output = createContainer('div', {
         backgroundColor: color,
         fontFamily: 'Arial',
         font: '14px',
         padding: '20px 50px',
+        whiteSpace: 'nowrap',
+        flex: 1,
     });
-    let titleDiv = document.createElement('h4');
-    titleDiv.innerHTML = title;
-    let descDiv = document.createElement('p');
-    descDiv.innerHTML = description;
+    let titleDiv = createText('h4', title);
+    let descDiv = createText('p', description);
     setChildren(output, [titleDiv, descDiv]);
     return output;
 };
@@ -233,93 +252,88 @@ let createFooter = (footer) => {
     Object.assign(footer.style, {
         backgroundColor: '#03153e'
     });
-    let prefooter = document.createElement('div');
-    Object.assign(prefooter.style, {
+    let prefooter = createContainer('div', {
         transform: 'translate(0, -50%)',
-        marginLeft: 'auto',
-        marginRight: 'auto',
         display: 'flex',
+        justifyContent: 'center',
         lineHeight: 1.4,
+    });
+    let prefooterWrapper = createContainer('div', centered, {
+        display: 'inline-flex',
+        flexWrap: 'wrap',
     });
     let prefooterLeft = prefooterBlock('#ffda43', 'HEAD OFFICE', 
         'PO Box 16122, Collins Street West <br/>Victoria 8007 Australia');
-    prefooterLeft.style.marginLeft = 'auto';
     let prefooterMid = prefooterBlock('#ffd426', 'CALL US',
         'SUPPORT 1800 425 4646 <br/>OFFICE: +1 (253) 2587 220');
     let prefooterRight = prefooterBlock('#ffd012', 'EMAIL US',
         'hello@offshoreindustry.com <br/>sales@offshoreindustry.com');
-    prefooterRight.style.marginRight = 'auto';
-    setChildren(prefooter, [prefooterLeft, prefooterMid, prefooterRight]);
-    let infoBar = document.createElement('div');
-    Object.assign(infoBar.style, {
+    setChildren(prefooterWrapper, [prefooterLeft, prefooterMid, prefooterRight]);
+    setChildren(prefooter, [prefooterWrapper]);
+    let infoBar = createContainer('div', {
         color: 'rgba(255, 255, 255, 0.5)',
         font: '16px',
         fontFamily: 'Arial',
+        paddingLeft: '20px',
+        paddingRight: '20px',
         display: 'flex',
+        justifyContent: 'center',
     });
-    infoBar.style.color = 'rgba(255, 255, 255, 0.5)';
-    let about = document.createElement('div');
-    about.style.maxWidth = '360px';
-    about.style.margin = '25px';
-    about.style.marginLeft = 'auto';
-    let footerLogoImg = document.createElement('img');
-    footerLogoImg.src = footerLogo;
-    let footerAbout = document.createElement('p');
-    footerAbout.style.lineHeight = 1.68;
-    footerAbout.innerText = 'Collaboratively deliver parternships progressive alignments. Assertively premier supply chains before emerging solutions. Monetize high-payoff action items before wireless internal or organic sources exceptional action items.';
+    let infoBarContentWrapper = createContainer('div', centered, {
+        display: 'inline-flex',
+        flexWrap: 'wrap',
+    });
+    let about = createContainer('div', {
+        maxWidth: '360px',
+        margin: '25px',
+    });
+    let footerLogoImg = createImage(footerLogo);
+    let footerAbout = createText('p', 'Collaboratively deliver partnerships progressive alignments. Assertively premier supply chains before emerging solutions. Monetize high-payoff action items before wireless internal or organic sources exceptional action items.', {
+        lineHeight: 1.68,
+    });
     setChildren(about, [footerLogoImg, footerAbout]);
-    let links = document.createElement('div');
-    links.style.margin = '25px';
+    let links = createContainer('div', {margin: '25px'});
     setChildren(links, [
-        textBlock('h2', 'QUICK LINKS', {color: '#ffffff'}),
-        textBlock('p', 'Careers'),
-        textBlock('p', 'Contact'),
-        textBlock('p', 'Market Info'),
-        textBlock('p', 'Technology'),
-        textBlock('p', 'Latest News'),
+        createText('h2', 'QUICK LINKS', {color: '#ffffff'}),
+        createText('p', 'Careers'),
+        createText('p', 'Contact'),
+        createText('p', 'Market Info'),
+        createText('p', 'Technology'),
+        createText('p', 'Latest News'),
     ]);
-    let services = document.createElement('div');
-    services.style.margin = '25px';
+    let services = createContainer('div', {margin: '25px'});
     setChildren(services, [
-        textBlock('h2', 'OUR SERVICES', {color: '#ffffff'}),
-        textBlock('p', 'Chemical & Commercial Fuels'),
-        textBlock('p', 'Aviation Fuels & Marine Fuels'),
-        textBlock('p', 'Lubricants Services'),
-        textBlock('p', 'Liquified Petrolium Gas'),
-        textBlock('p', 'Shell Sulphur, Trading & Supply'),
+        createText('h2', 'OUR SERVICES', {color: '#ffffff'}),
+        createText('p', 'Chemical & Commercial Fuels'),
+        createText('p', 'Aviation Fuels & Marine Fuels'),
+        createText('p', 'Lubricants Services'),
+        createText('p', 'Liquified Petrolium Gas'),
+        createText('p', 'Shell Sulphur, Trading & Supply'),
     ]);
-    let newsletter = document.createElement('div');
-    newsletter.style.margin = '25px';
-    newsletter.style.marginRight = 'auto';
-    newsletter.style.maxWidth = '360px';
-    let subscribeButton = document.createElement('button');
-    Object.assign(subscribeButton.style, {
-        backgroundColor: '#ffd426', 
-        fontSize: '22px',
-        fontWeight: 'bold',
-        padding: '10px', 
-        color: '#000',
-        width: '100%',
+    let newsletter = createContainer('div', {
+        margin: '25px',
+        maxWidth: '360px',
     });
-    subscribeButton.innerText = 'SUBSCRIBE NOW!';
+    let subscribeButton = createButton('SUBSCRIBE NOW!', buttonDefault, {
+        width: 'auto',
+    });
     setChildren(newsletter, [
-        textBlock('h2', 'NEWSLETTER', {color: '#fff'}),
-        textBlock('p', 'Subscribe to our newsletters to receive latest news and updates.'),
-        textBlock('p', 'Enter your email', {backgroundColor: '#fff', padding: '10px', color: '#777'}),
+        createText('h2', 'NEWSLETTER', {color: '#fff'}),
+        createText('p', 'Subscribe to our newsletters to receive latest news and updates.'),
+        createText('p', 'Enter your email', {backgroundColor: '#fff', padding: '10px', color: '#777'}),
         subscribeButton
     ]);
-    setChildren(infoBar, [about, links, services, newsletter]);
+    setChildren(infoBarContentWrapper, [about, links, services, newsletter]);
+    setChildren(infoBar, [infoBarContentWrapper]);
 
-    let copyright = document.createElement('div');
-    Object.assign(copyright.style, {
+    let copyright = createContainer('div', {
         backgroundColor: '#020e28',
         padding: '35px 0',
         display: 'flex',
         color: '#8d8d8d',
         fontFamily: 'Arial',
     });
-    let copyrightWrapper = document.createElement('div');
-    Object.assign(copyrightWrapper.style, {
+    let copyrightWrapper = createContainer('div', {
         width: '1170px',
         maxWidth: '100%',
         marginLeft: 'auto',
@@ -327,10 +341,9 @@ let createFooter = (footer) => {
         padding: '0 15px',
         display: 'flex',
     });
-    let copyrightLeft = document.createElement('div');
-    copyrightLeft.innerText = 'Copyright \u00a9 2016 Offshore Industries. All rights reserved.';
-    let copyrightRight = document.createElement('div');
-    copyrightRight.innerText = 'Terms of Use \t Privacy Policy';
+    let copyrightLeft = createText('div', 
+        'Copyright \u00a9 2016 Offshore Industries. All rights reserved.')
+    let copyrightRight = createText('div', 'Terms of Use \t Privacy Policy');
     setChildren(copyrightWrapper, [copyrightLeft, expandingDiv(), copyrightRight]);
     setChildren(copyright, [copyrightWrapper]);
     setChildren(footer, [prefooter, infoBar, copyright]);
