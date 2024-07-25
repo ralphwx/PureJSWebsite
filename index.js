@@ -83,11 +83,11 @@ setChildren(root, [header, main, footer]);
 let sectionCounter = 0;
 let makeSection = () => {
     sectionCounter++;
-    let backgroundColor = sectionCounter & 1 ? 'lightgray' : 'darkgray';
+    let backgroundColor = sectionCounter & 1 ? '#f4f5f8' : '';
     let output = createContainer('section', {
-        width: '100%',
         minHeight: '15dvh',
         backgroundColor: backgroundColor,
+        fontFamily: 'Arial',
     });
     return output;
 }
@@ -228,6 +228,53 @@ let createHomeSlider = (section) => {
 }
 
 createHomeSlider(homeSlider);
+
+/**
+ * Create home company section
+ */
+
+let createHomeCompany = (section) => {
+    section.style.padding = '80px 0';
+    section.style.display = 'flex';
+    let container = createContainer('div', centered, {
+        display: 'flex',
+        padding: '15px',
+    });
+    let description = createContainer('div', {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '30%',
+        margin: '0px 15px',
+    });
+    let title = createText('h2', 'THE COMPANY', {
+        backgroundColor: '#ffda44',
+        padding: '10px',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        color: 'white',
+        width: '130px',
+    });
+    let p1 = createText('h4', 'Interactively empower diverse imperatives after prospective convergence.', {
+        color: 'blue',
+        fontSize: '20px',
+        fontWeight: 'bold',
+        lineHeight: '1.4',
+    });
+    let p2 = createText('p', 'Assertively productize efficient partnerships through customer directed supply chains. Continually maintain process-centric catalysts for change via backward compatible value.', {
+        color: '#677078',
+        lineHeight: '1.68',
+    });
+    let button = createButton('READ OUR MISSION', buttonDefault, {
+        backgroundColor: '#093eb6',
+        color: 'white',
+        width: '200px',
+    });
+    setChildren(description, [title, p1, p2, button]);
+    let illustration = tallImg(company);
+    setChildren(container, [expandingDiv(), description, expandingDiv(), illustration, expandingDiv()]);
+    setChildren(section, [container]);
+}
+createHomeCompany(homeCompany);
 
 /**
  * Create footer
