@@ -37,6 +37,9 @@ for(child of [homeSlider, homeCompany, homeCeo, homeServices, homeLinks, homePro
     main.appendChild(child);
 }
 
+let footer = document.createElement('div');
+main.appendChild(footer);
+
 /**
  * Header section
  */
@@ -198,3 +201,139 @@ let createHomeSlider = (section) => {
 }
 
 createHomeSlider(homeSlider);
+
+/**
+ * Create footer
+ */
+
+let textBlock = (type, text, ...styles) => {
+    let output = document.createElement(type);
+    output.innerText = text;
+    for(style of styles) Object.assign(output.style, style);
+    return output;
+}
+
+let prefooterBlock = (color, title, description) => {
+    let output = document.createElement('div');
+    Object.assign(output.style, {
+        backgroundColor: color,
+        fontFamily: 'Arial',
+        font: '14px',
+        padding: '20px 50px',
+    });
+    let titleDiv = document.createElement('h4');
+    titleDiv.innerHTML = title;
+    let descDiv = document.createElement('p');
+    descDiv.innerHTML = description;
+    setChildren(output, [titleDiv, descDiv]);
+    return output;
+};
+
+let createFooter = (footer) => {
+    Object.assign(footer.style, {
+        backgroundColor: '#03153e'
+    });
+    let prefooter = document.createElement('div');
+    Object.assign(prefooter.style, {
+        transform: 'translate(0, -50%)',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        display: 'flex',
+        lineHeight: 1.4,
+    });
+    let prefooterLeft = prefooterBlock('#ffda43', 'HEAD OFFICE', 
+        'PO Box 16122, Collins Street West <br/>Victoria 8007 Australia');
+    prefooterLeft.style.marginLeft = 'auto';
+    let prefooterMid = prefooterBlock('#ffd426', 'CALL US',
+        'SUPPORT 1800 425 4646 <br/>OFFICE: +1 (253) 2587 220');
+    let prefooterRight = prefooterBlock('#ffd012', 'EMAIL US',
+        'hello@offshoreindustry.com <br/>sales@offshoreindustry.com');
+    prefooterRight.style.marginRight = 'auto';
+    setChildren(prefooter, [prefooterLeft, prefooterMid, prefooterRight]);
+    let infoBar = document.createElement('div');
+    Object.assign(infoBar.style, {
+        color: 'rgba(255, 255, 255, 0.5)',
+        font: '16px',
+        fontFamily: 'Arial',
+        display: 'flex',
+    });
+    infoBar.style.color = 'rgba(255, 255, 255, 0.5)';
+    let about = document.createElement('div');
+    about.style.maxWidth = '360px';
+    about.style.margin = '25px';
+    about.style.marginLeft = 'auto';
+    let footerLogoImg = document.createElement('img');
+    footerLogoImg.src = footerLogo;
+    let footerAbout = document.createElement('p');
+    footerAbout.style.lineHeight = 1.68;
+    footerAbout.innerText = 'Collaboratively deliver parternships progressive alignments. Assertively premier supply chains before emerging solutions. Monetize high-payoff action items before wireless internal or organic sources exceptional action items.';
+    setChildren(about, [footerLogoImg, footerAbout]);
+    let links = document.createElement('div');
+    links.style.margin = '25px';
+    setChildren(links, [
+        textBlock('h2', 'QUICK LINKS', {color: '#ffffff'}),
+        textBlock('p', 'Careers'),
+        textBlock('p', 'Contact'),
+        textBlock('p', 'Market Info'),
+        textBlock('p', 'Technology'),
+        textBlock('p', 'Latest News'),
+    ]);
+    let services = document.createElement('div');
+    services.style.margin = '25px';
+    setChildren(services, [
+        textBlock('h2', 'OUR SERVICES', {color: '#ffffff'}),
+        textBlock('p', 'Chemical & Commercial Fuels'),
+        textBlock('p', 'Aviation Fuels & Marine Fuels'),
+        textBlock('p', 'Lubricants Services'),
+        textBlock('p', 'Liquified Petrolium Gas'),
+        textBlock('p', 'Shell Sulphur, Trading & Supply'),
+    ]);
+    let newsletter = document.createElement('div');
+    newsletter.style.margin = '25px';
+    newsletter.style.marginRight = 'auto';
+    newsletter.style.maxWidth = '360px';
+    let subscribeButton = document.createElement('button');
+    Object.assign(subscribeButton.style, {
+        backgroundColor: '#ffd426', 
+        fontSize: '22px',
+        fontWeight: 'bold',
+        padding: '10px', 
+        color: '#000',
+        width: '100%',
+    });
+    subscribeButton.innerText = 'SUBSCRIBE NOW!';
+    setChildren(newsletter, [
+        textBlock('h2', 'NEWSLETTER', {color: '#fff'}),
+        textBlock('p', 'Subscribe to our newsletters to receive latest news and updates.'),
+        textBlock('p', 'Enter your email', {backgroundColor: '#fff', padding: '10px', color: '#777'}),
+        subscribeButton
+    ]);
+    setChildren(infoBar, [about, links, services, newsletter]);
+
+    let copyright = document.createElement('div');
+    Object.assign(copyright.style, {
+        backgroundColor: '#020e28',
+        padding: '35px 0',
+        display: 'flex',
+        color: '#8d8d8d',
+        fontFamily: 'Arial',
+    });
+    let copyrightWrapper = document.createElement('div');
+    Object.assign(copyrightWrapper.style, {
+        width: '1170px',
+        maxWidth: '100%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        padding: '0 15px',
+        display: 'flex',
+    });
+    let copyrightLeft = document.createElement('div');
+    copyrightLeft.innerText = 'Copyright \u00a9 2016 Offshore Industries. All rights reserved.';
+    let copyrightRight = document.createElement('div');
+    copyrightRight.innerText = 'Terms of Use \t Privacy Policy';
+    setChildren(copyrightWrapper, [copyrightLeft, expandingDiv(), copyrightRight]);
+    setChildren(copyright, [copyrightWrapper]);
+    setChildren(footer, [prefooter, infoBar, copyright]);
+};
+
+createFooter(footer);
