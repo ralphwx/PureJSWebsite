@@ -112,11 +112,11 @@ let makeSection = () => {
     return output;
 }
 
-let [homeSlider, homeCompany, homeCeo, homeServices, homeLinks, homeProcess, homeStats, homeServicesOther, homeTestimonials, homePublications, homeNews, homePartners] = Array.from({length: 12}, (_, i) => {return makeSection()});
+let [homeSlider, homeCompany, homeCeo, homeServices, homeStats, homeServicesOther, homeTestimonials, homePublications, homeNews, homePartners] = Array.from({length: 10}, (_, i) => {return makeSection()});
 
 
 setChildren(main, [
-    homeSlider, homeCompany, homeCeo, homeServices, homeLinks, homeProcess,
+    homeSlider, homeCompany, homeCeo, homeServices, 
     homeStats, homeServicesOther, homeTestimonials, homePublications, homeNews,
     homePartners,
 ]);
@@ -382,132 +382,6 @@ let makeHomeServices = (section) => {
     setChildren(section, [container]);
 }
 makeHomeServices(homeServices);
-
-/**
- * Quick links
- */
-
-let linkButton = Object.assign({}, buttonDefault, {
-    backgroundColor: 'white',
-    color: '#8d8d8d',
-    margin: '20px',
-    padding: '15px',
-    fontSize: '15px',
-});
-
-let makeLinks = (section) => {
-    let container = createContainer('div', centered, flexWrapContainer, {
-        alignItems: 'center',
-    });
-    let linkTitle = createText('h4', 'Quick links', {
-        fontSize: '20px',
-        color: '#093eb6',
-        fontWeight: 'bold',
-        margin: '30px',
-        marginRight: '100px',
-    });
-    let career = createButton('CAREERS', linkButton);
-    let contact = createButton('CONTACT', linkButton);
-    let market = createButton('MARKET INFO', linkButton);
-    let tech = createButton('TECHNOLOGY', linkButton);
-    let news = createButton('LATEST NEWS', linkButton);
-    setChildren(container, [linkTitle, career, contact, market, tech, news]);
-    setChildren(section, [container]);
-}
-makeLinks(homeLinks);
-
-/**
- * Create home process
- */
-
-let statSlider = (caption, quantity, sliderPosition) => {
-    let output = createContainer('div', {
-        width: '40dvw',
-        minWidth: '350px',
-        margin: '40px 0',
-    });
-    let description = createContainer('div', {
-        display: 'flex',
-        fontSize: '15px',
-        marginBottom: '10px',
-    });
-    let captionDiv = createText('div', caption, {
-        color: '#677078',
-    });
-    let quantityDiv = createText('div', quantity, {
-        color: '#093eb6',
-    });
-    setChildren(description, [captionDiv, expandingDiv(), quantityDiv]);
-    let barContainer = createContainer('div', {
-        width: '100%',
-        height: '10px',
-        backgroundColor: '#f4f5f8',
-        position: 'relative',
-    });
-    let fillBar = createContainer('div', {
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        width: sliderPosition,
-        height: '100%',
-        backgroundColor: '#ffda44',
-    });
-    let fillDot = createContainer('div', {
-        position: 'absolute',
-        top: '50%',
-        left: sliderPosition,
-        width: '20px',
-        height: '20px',
-        borderRadius: '50%',
-        backgroundColor: '#ffda44',
-        border: '4px solid white',
-        transform: 'translate(-50%, -50%)',
-    });
-    setChildren(barContainer, [fillBar, fillDot]);
-    setChildren(output, [description, barContainer]);
-    return output;
-}
-
-let makeProcess = (section) => {
-    let container = createContainer('div', centered, flexWrapContainer, {
-        padding: '20px',
-        marginBottom: '30px',
-        gap: '30px',
-    });
-
-    let description = createContainer('div', {
-        width: '40dvw',
-        minWidth: '350px',
-    });
-    let title = createText('h1', 'OUR PROCESS', {
-        fontSize: '40px',
-        color: '#093eb6',
-        fontWeight: 'bold',
-    });
-    let subtitle = createText('h4', 'Interactively empower diverse imperatives after prospective convergence', {
-        fontSize: '20px', 
-        color: '#4c4f54',
-        fontWeight: 'bold',
-        lineHeight: 1.4,
-    });
-    let p1 = createText('p', 'Interactively fashion functional action items after 24/365 results. Dynamically redefine world-class metrics without leading-edge markets. Progressively orchestrate enabled outside-the-box thinking via scalable quality vectors. Objectively unleash optimal core competencies.', descriptionStyle);
-    let readMoreButton = createButton('READ THE STORY', buttonDefault, {
-        backgroundColor: '#093eb6',
-        color: '#fff',
-        fontSize: '16px',
-        width: '160px',
-    });
-    setChildren(description, [title, subtitle, p1, readMoreButton]);
-    let statsBox = createContainer('div');
-    let fuelStat = statSlider('FEUL AND MISCELLANEOUS', '46%', '46%');
-    let liquidStat = statSlider('LIQUID CHEMICALS', '78%', '78%');
-    let monoStat = statSlider('MONOMERS/POLYMERS', '70%', '70%');
-    let isoStat = statSlider('ISOCYANATE', '80%', '80%');
-    setChildren(statsBox, [fuelStat, liquidStat, monoStat, isoStat]);
-    setChildren(container, [description, statsBox]);
-    setChildren(section, [container]);
-}
-makeProcess(homeProcess);
 
 /**
  * Create home stats
