@@ -75,10 +75,17 @@ let descriptionStyle = {
     lineHeight: '1.68',
 }
 
+let flexWrapContainer = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+}
+
 let expandingDiv = () => {
     let output = createContainer('div', centered);
     return output;
 }
+
 /**
  * Create header and main
  */
@@ -158,12 +165,10 @@ let menuItem = (inner) => {
 }
 
 let createHeader = (header) => {
-    let logoTopInfo = createContainer('div', {
+    let logoTopInfo = createContainer('div', centered, {
         width: '1170px',
         maxWidth: '100%',
         height: '60px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
         display: 'flex',
         padding: '25px 0',
         alignItems: 'center',
@@ -193,9 +198,7 @@ let createHeader = (header) => {
         backgroundColor: '#f4f5f8',
         display: 'flex',
     });
-    let menu = createContainer('div', {
-        marginLeft: 'auto',
-        marginRight: 'auto',
+    let menu = createContainer('div', centered, {
         display: 'flex',
         listStyleType: 'none',
         width: '1170px',
@@ -274,12 +277,9 @@ createHomeSlider(homeSlider);
 let createHomeCompany = (section) => {
     section.style.padding = '80px 0';
     section.style.display = 'flex';
-    let container = createContainer('div', centered, {
-        display: 'flex',
+    let container = createContainer('div', centered, flexWrapContainer, {
         padding: '15px',
-        flexWrap: 'wrap',
         gap: '30px',
-        justifyContent: 'center',
     });
     let description = createContainer('div', {
         display: 'flex',
@@ -316,13 +316,9 @@ createHomeCompany(homeCompany);
  */
 let createHomeCEO = (section) => {
     section.style.display = 'flex';
-    let container = createContainer('div', centered, {
-        display: 'flex',
-        flexWrap: 'wrap',
-        maxWidth: '100%',
+    let container = createContainer('div', centered, flexWrapContainer, {
         padding: '15px',
         gap: '60px',
-        justifyContent: 'center',
     });
     let ceoImg = createImage(ceo, {
         width: '474px',
@@ -346,6 +342,46 @@ let createHomeCEO = (section) => {
     setChildren(section, [container]);
 }
 createHomeCEO(homeCeo);
+
+/**
+ * Home services section
+ */
+
+let serviceBlock = (imgSrc, title, description) => {
+    let output = createContainer('div', {
+        minWidth: '350px',
+        width: '25dvw',
+        display: 'flex',
+        flexDirection: 'column',
+    });
+    let image = createImage(imgSrc);
+    let titleDiv = createText('h4', title, {
+        fontSize: '20px', 
+        color: '#093eb6',
+        fontWeight: 'bold',
+        lineHeight: '1.4',
+    });
+    let descriptionDiv = createText('p', description, descriptionStyle);
+    let button = createButton('READ MORE', buttonDefault, {
+        fontSize: '14px',
+        width: '100px',
+    });
+    setChildren(output, [image, titleDiv, descriptionDiv, button]);
+    return output;
+}
+
+let makeHomeServices = (section) => {
+    let container = createContainer('div', centered, flexWrapContainer, {
+        padding: '50px',
+        gap: '20px',
+    });
+    let s1 = serviceBlock(service1ImgSrc, 'TECHNOLOGY & INNOVATION', 'Professionally drive clicks-and-mortar web readiness after progressive e-commerce. Dramatically unleash cross functional.');
+    let s2 = serviceBlock(service2ImgSrc, 'OUR OPERATIONS', 'Energistically productize wireless mindshare for emerging experiences. Mycardinate enabled alignments and magnetic scenarios.');
+    let s3 = serviceBlock(service3ImgSrc, 'SOCIAL RESPONSIBILITY', 'Globally incubate principle-centered e-markets with standards compliant catalysts for change. Efficiently extend highly efficient products.');
+    setChildren(container, [s1, s2, s3]);
+    setChildren(section, [container]);
+}
+makeHomeServices(homeServices);
 
 /**
  * Create footer
@@ -451,11 +487,9 @@ let createFooter = (footer) => {
         color: '#8d8d8d',
         fontFamily: 'Arial',
     });
-    let copyrightWrapper = createContainer('div', {
+    let copyrightWrapper = createContainer('div', centered, {
         width: '1170px',
         maxWidth: '100%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
         padding: '0 15px',
         display: 'flex',
     });
