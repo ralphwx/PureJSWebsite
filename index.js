@@ -384,6 +384,39 @@ let makeHomeServices = (section) => {
 makeHomeServices(homeServices);
 
 /**
+ * Quick links
+ */
+
+let linkButton = Object.assign({}, buttonDefault, {
+    backgroundColor: 'white',
+    color: '#8d8d8d',
+    margin: '20px',
+    padding: '15px',
+    fontSize: '15px',
+});
+
+let makeLinks = (section) => {
+    let container = createContainer('div', centered, flexWrapContainer, {
+        alignItems: 'center',
+    });
+    let linkTitle = createText('h4', 'Quick links', {
+        fontSize: '20px',
+        color: '#093eb6',
+        fontWeight: 'bold',
+        margin: '30px',
+        marginRight: '100px',
+    });
+    let career = createButton('CAREERS', linkButton);
+    let contact = createButton('CONTACT', linkButton);
+    let market = createButton('MARKET INFO', linkButton);
+    let tech = createButton('TECHNOLOGY', linkButton);
+    let news = createButton('LATEST NEWS', linkButton);
+    setChildren(container, [linkTitle, career, contact, market, tech, news]);
+    setChildren(section, [container]);
+}
+makeLinks(homeLinks);
+
+/**
  * Create footer
  */
 
