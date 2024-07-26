@@ -145,7 +145,7 @@ let menuItem = (inner) => {
 }
 
 let createHeader = (header) => {
-    logoTopInfo = createContainer('div', {
+    let logoTopInfo = createContainer('div', {
         width: '1170px',
         maxWidth: '100%',
         height: '60px',
@@ -153,9 +153,11 @@ let createHeader = (header) => {
         marginRight: 'auto',
         display: 'flex',
         padding: '25px 0',
+        alignItems: 'center',
     });
     let contact = createContainer('div', {
         display: 'flex',
+        height: '60px',
     });
     let call = contactCard('CALL US', '1800 425 4646');
     let email = contactCard('EMAIL US', 'info@offshoreinsustry.com');
@@ -166,20 +168,24 @@ let createHeader = (header) => {
         call, email, market, hSpace('20px'), tallImg(fb), hSpace('20px'),
         tallImg(twitter), hSpace('20px'), tallImg(linkedin)
     ]);
+    let logoImg = tallImg(logo);
+    let barsImg = createImage(bars, {
+        width: '44px',
+        height: '34px',
+    });
     setChildren(logoTopInfo, [
-        tallImg(logo), expandingDiv(), contact
+        logoImg, expandingDiv(), contact, barsImg
     ]);
     let navbar = createContainer('nav', {
         backgroundColor: '#f4f5f8',
         display: 'flex',
     });
     let menu = createContainer('div', {
-        width: '1170px',
-        maxWidth: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
         display: 'flex',
         listStyleType: 'none',
+        width: '1170px',
     });
     setChildren(menu, [
         menuItem('HOME'), menuItem('ABOUT'), menuItem('SERVICES'), 
@@ -188,6 +194,27 @@ let createHeader = (header) => {
     ]);
     setChildren(navbar, [menu]);
     setChildren(header, [logoTopInfo, navbar]);
+    let checkWidth = () => {
+        contact.style.display = 'flex';
+        barsImg.style.display = 'none';
+        navbar.style.display = 'flex';
+        containerWidth = logoTopInfo.offsetWidth;
+        logoWidth = logoImg.offsetWidth;
+        contactWidth = contact.offsetWidth;
+        if(contactWidth + logoWidth >= containerWidth) {
+            contact.style.display = 'none';
+            barsImg.style.display = 'block';
+        }
+        navbarWidth = menu.offsetWidth;
+        console.log('navbar width:' + navbarWidth);
+        console.log('window width:' + window.innerWidth);
+        if(navbarWidth > window.innerWidth) {
+            navbar.style.display = 'none';
+        }
+    };
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
+
 }
 createHeader(header);
 
