@@ -177,8 +177,8 @@ let createHeader = (header) => {
         display: 'flex',
         height: '60px',
     });
-    let call = contactCard('CALL US', '1800 425 4646');
-    let email = contactCard('EMAIL US', 'info@offshoreinsustry.com');
+    let call = contactCard('CALL US', '1800 555 5555');
+    let email = contactCard('EMAIL US', 'info@deepwaterenergy.com');
     let market = contactCard('MARKET', '256.78 (+4.26)');
     email.style.borderLeft = '1px solid #e9ecf2';
     email.style.borderRight = '1px solid #e9ecf2';
@@ -186,7 +186,7 @@ let createHeader = (header) => {
         call, email, market, hSpace('20px'), tallImg(fb), hSpace('20px'),
         tallImg(twitter), hSpace('20px'), tallImg(linkedin)
     ]);
-    let logoImg = tallImg(logo);
+    let logoImg = tallImg(logoImgSrc);
     let barsImg = createImage(bars, {
         width: '44px',
         height: '34px',
@@ -203,27 +203,34 @@ let createHeader = (header) => {
         listStyleType: 'none',
         width: '1170px',
     });
+    let altMenu = createText('div', '\u{1f4de} <b>Call Us</b>&nbsp;&nbsp;&nbsp; SUPPORT: 1800 555 5555&nbsp;&nbsp;&nbsp; OFFICE:+1 (281) 555 5555', descriptionStyle, {
+        width: '100%',
+        backgroundColor: '#f4f5f8',
+        textAlign: 'center',
+        fontFamily: 'Arial',
+        padding: '20px',
+        fontSize: '20px',
+    });
     setChildren(menu, [
         menuItem('HOME'), menuItem('ABOUT'), menuItem('SERVICES'), 
         menuItem('TECHNOLOGY'), menuItem('NEWS & MEDIA'), menuItem('PAGES'),
-        menuItem('CAREERS'), menuItem('CONTACT')
+        menuItem('CAREERS'), menuItem('CONTACT'), altMenu
     ]);
     setChildren(navbar, [menu]);
-    setChildren(header, [logoTopInfo, navbar]);
+    setChildren(header, [logoTopInfo, navbar, altMenu]);
     let checkWidth = () => {
         contact.style.display = 'flex';
         barsImg.style.display = 'none';
         navbar.style.display = 'flex';
+        altMenu.style.display = 'none';
         containerWidth = logoTopInfo.offsetWidth;
         logoWidth = logoImg.offsetWidth;
         contactWidth = contact.offsetWidth;
         if(contactWidth + logoWidth >= containerWidth) {
             contact.style.display = 'none';
             barsImg.style.display = 'block';
-        }
-        navbarWidth = menu.offsetWidth;
-        if(navbarWidth > window.innerWidth) {
             navbar.style.display = 'none';
+            altMenu.style.display = 'block';
         }
     };
     window.addEventListener('resize', checkWidth);
