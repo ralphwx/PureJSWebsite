@@ -85,7 +85,6 @@ let makeSection = () => {
     sectionCounter++;
     let backgroundColor = sectionCounter & 1 ? '#f4f5f8' : '';
     let output = createContainer('section', {
-        minHeight: '15dvh',
         backgroundColor: backgroundColor,
         fontFamily: 'Arial',
     });
@@ -101,6 +100,8 @@ setChildren(main, [
     homePartners,
 ]);
 
+homePartners.style.height = '1000px';
+homePartners.style.backgroundColor = 'gray';
 /**
  * Header section
  */
@@ -222,7 +223,7 @@ let createHomeSlider = (section) => {
         fontSize: '20px',
         margin: '0 0 40px',
     });
-    let button = createButton('KNOW MORE', buttonDefault);
+    let button = createButton('Know More', buttonDefault);
     setChildren(overlay, [bigText, smallText, button]);
     setChildren(section, [backgroundImage, overlay]);
 }
@@ -234,27 +235,26 @@ createHomeSlider(homeSlider);
  */
 
 let createHomeCompany = (section) => {
-    section.style.padding = '80px 0';
+    //section.style.padding = '80px 0';
     section.style.display = 'flex';
     let container = createContainer('div', centered, {
         display: 'flex',
         padding: '15px',
-        flexWrap: 'wrap',
-        gap: '30px',
+        border: '2px solid green',
     });
-    let description = createContainer('div', {
+    let r1 = createContainer('div', {
         display: 'flex',
         flexDirection: 'column',
         minWidth: '400px',
         width: '30dvw',
-        margin: '0px 15px',
+        border: '3px dotted red',
     });
-    let title = createText('h2', 'THE COMPANY', {
-        backgroundColor: '#ffda44',
+    let title = createText('div', 'THE COMPANY', {
         padding: '10px',
         fontSize: '16px',
         fontWeight: 'bold',
         color: 'white',
+        backgroundColor: '#ffda44',
         width: '130px',
     });
     let p1 = createText('h4', 'Interactively empower diverse imperatives after prospective convergence.', {
@@ -263,19 +263,48 @@ let createHomeCompany = (section) => {
         fontWeight: 'bold',
         lineHeight: '1.4',
     });
-    let p2 = createText('p', 'Assertively productize efficient partnerships through customer directed supply chains. Continually maintain process-centric catalysts for change via backward compatible value.', {
-        color: '#677078',
-        lineHeight: '1.68',
-    });
-    let button = createButton('READ OUR MISSION', buttonDefault, {
-        backgroundColor: '#093eb6',
-        color: 'white',
-        width: '200px',
-    });
-    setChildren(description, [title, p1, p2, button]);
-    let illustration = tallImg(company);
-    illustration.style.maxHeight = '370px';
-    setChildren(container, [description, illustration]);
+
+    setChildren(r1, [title, p1]);
+//    let r1 = createContainer('div', {
+//        width: '300px',
+//        height: '500px',
+//        backgroundColor: 'orange',
+//        marginRight: '10px',
+//    });
+    let r2 = tallImg(company);
+    setChildren(container, [r1, r2]);
+//    let description = createContainer('div', {
+//        display: 'flex',
+//        flexDirection: 'column',
+//        width: '30%',
+//        margin: '0px 15px',
+//    });
+//    let title = createText('h2', 'THE COMPANY', {
+//        backgroundColor: '#ffda44',
+//        padding: '10px',
+//        fontSize: '16px',
+//        fontWeight: 'bold',
+//        color: 'white',
+//        width: '130px',
+//    });
+//    let p1 = createText('h4', 'Interactively empower diverse imperatives after prospective convergence.', {
+//        color: 'blue',
+//        fontSize: '20px',
+//        fontWeight: 'bold',
+//        lineHeight: '1.4',
+//    });
+//    let p2 = createText('p', 'Assertively productize efficient partnerships through customer directed supply chains. Continually maintain process-centric catalysts for change via backward compatible value.', {
+//        color: '#677078',
+//        lineHeight: '1.68',
+//    });
+//    let button = createButton('READ OUR MISSION', buttonDefault, {
+//        backgroundColor: '#093eb6',
+//        color: 'white',
+//        width: '200px',
+//    });
+//    setChildren(description, [title, p1, p2, button]);
+//    let illustration = tallImg(company);
+//    setChildren(container, [expandingDiv(), description, expandingDiv(), illustration, expandingDiv()]);
     setChildren(section, [container]);
 }
 createHomeCompany(homeCompany);
