@@ -62,6 +62,19 @@ let centered = {
     marginRight: 'auto',
 };
 
+let miniTitle = {
+    backgroundColor: '#ffda44',
+    padding: '10px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: 'white',
+}
+
+let descriptionStyle = {
+    color: '#677078',
+    lineHeight: '1.68',
+}
+
 let expandingDiv = () => {
     let output = createContainer('div', centered);
     return output;
@@ -206,15 +219,13 @@ let createHeader = (header) => {
             barsImg.style.display = 'block';
         }
         navbarWidth = menu.offsetWidth;
-        console.log('navbar width:' + navbarWidth);
-        console.log('window width:' + window.innerWidth);
         if(navbarWidth > window.innerWidth) {
             navbar.style.display = 'none';
         }
     };
     window.addEventListener('resize', checkWidth);
     window.addEventListener('load', checkWidth);
-
+    checkWidth();
 }
 createHeader(header);
 
@@ -268,6 +279,7 @@ let createHomeCompany = (section) => {
         padding: '15px',
         flexWrap: 'wrap',
         gap: '30px',
+        justifyContent: 'center',
     });
     let description = createContainer('div', {
         display: 'flex',
@@ -276,12 +288,7 @@ let createHomeCompany = (section) => {
         width: '30dvw',
         margin: '0px 15px',
     });
-    let title = createText('h2', 'THE COMPANY', {
-        backgroundColor: '#ffda44',
-        padding: '10px',
-        fontSize: '16px',
-        fontWeight: 'bold',
-        color: 'white',
+    let title = createText('h2', 'THE COMPANY', miniTitle, {
         width: '130px',
     });
     let p1 = createText('h4', 'Interactively empower diverse imperatives after prospective convergence.', {
@@ -290,10 +297,7 @@ let createHomeCompany = (section) => {
         fontWeight: 'bold',
         lineHeight: '1.4',
     });
-    let p2 = createText('p', 'Assertively productize efficient partnerships through customer directed supply chains. Continually maintain process-centric catalysts for change via backward compatible value.', {
-        color: '#677078',
-        lineHeight: '1.68',
-    });
+    let p2 = createText('p', 'Assertively productize efficient partnerships through customer directed supply chains. Continually maintain process-centric catalysts for change via backward compatible value.', descriptionStyle);
     let button = createButton('READ OUR MISSION', buttonDefault, {
         backgroundColor: '#093eb6',
         color: 'white',
@@ -306,6 +310,42 @@ let createHomeCompany = (section) => {
     setChildren(section, [container]);
 }
 createHomeCompany(homeCompany);
+
+/**
+ * Create home-ceo section
+ */
+let createHomeCEO = (section) => {
+    section.style.display = 'flex';
+    let container = createContainer('div', centered, {
+        display: 'flex',
+        flexWrap: 'wrap',
+        maxWidth: '100%',
+        padding: '15px',
+        gap: '60px',
+        justifyContent: 'center',
+    });
+    let ceoImg = createImage(ceo, {
+        width: '474px',
+        height: 'auto',
+        padding: '0px 15px',
+    });
+    let description = createContainer('div', {
+        width: '30dvw',
+        minWidth: '400px',
+        padding: '45px 15px',
+    });
+    let title = createText('h2', 'WORD FROM CEO', miniTitle, {
+        width: '145px',
+    });
+    let p1 = createText('p', 'Proactively incubate enterprise total linkage without sustainable leadership skills. Monotonectally strategize user-centric interfaces whereas low-risk high-yield materials. Efficiently syndicate web-enabled portals for principle centered partnerships.', descriptionStyle);
+    let p2 = createText('p', 'Proactively whiteboard revolutionary processes after scalable testing procedures. Holisticly reinvent seamless after business.', descriptionStyle);
+    let signature = createImage(ceoSignature);
+    let ceoName = createText('p', 'Gregory Walker, CEO');
+    setChildren(description, [title, p1, p2, signature, ceoName]);
+    setChildren(container, [ceoImg, description]);
+    setChildren(section, [container]);
+}
+createHomeCEO(homeCeo);
 
 /**
  * Create footer
