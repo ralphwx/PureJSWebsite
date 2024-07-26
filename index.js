@@ -510,6 +510,57 @@ let makeProcess = (section) => {
 makeProcess(homeProcess);
 
 /**
+ * Create home stats
+ */
+let statBox = (img, number, caption) => {
+    let output = createContainer('div', flexWrapContainer, {
+        backgroundColor: '#f4f5f8',
+        flex: '1',
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        padding: '20px 10px',
+        justifyContent: 'center',
+        minWidth: '200px',
+    });
+    let image = createImage(img, {
+        width: 'auto',
+        height: '40px',
+    });
+    let numberDiv = createText('div', number, {
+        fontSize: '36px',
+        color: '#093eb6',
+        fontWeight: 'bold',
+    });
+    let captionDiv = createText('div', caption, descriptionStyle);
+    let descriptionDiv = createContainer('div', {
+        marginLeft: '10px',
+        textAlign: 'center',
+    });
+    setChildren(descriptionDiv, [numberDiv, captionDiv]);
+    setChildren(output, [image, descriptionDiv]);
+    return output;
+};
+
+let makeStats = (section) => {
+    section.style.backgroundColor = 'lightgray';
+    section.style.minHeight = '1px';
+    let offices = statBox(globe, '26', 'Offices Worldwide');
+    let empl = statBox(friends, '10K', 'Satisfied Employees');
+    let refineries = statBox(fire, '126', 'Refineries & Operations');
+    let awards = statBox(badge, '35', 'Awards & Recognitions');
+    let container = createContainer('div', {
+        width: '100%',
+        display: 'flex',
+        gap: '1px',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+    });
+    setChildren(container, [offices, empl, refineries, awards]);
+    setChildren(section, [container]);
+}
+makeStats(homeStats);
+
+/**
  * Create footer
  */
 
