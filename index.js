@@ -43,7 +43,7 @@ let createButton = (inner, ...styles) => {
 
 let buttonDefault = {
     backgroundColor: '#ffda44',
-    fontSize: '20px',
+    fontSize: '16px',
     color: '#4c443a',
     fontWeight: 'bold',
     font: 'Arial',
@@ -155,8 +155,8 @@ let tallImg = (src) => {
 
 let menuItem = (inner) => {
     let output = createText('li', inner, {
-        fontSize: '15px',
-        padding: '20px 25px',
+        fontSize: '13px',
+        padding: '20px 20px',
         fontWeight: 'bold',
         fontFamily: 'Arial',
         color: '#61656f',
@@ -198,10 +198,9 @@ let createHeader = (header) => {
         backgroundColor: '#f4f5f8',
         display: 'flex',
     });
-    let menu = createContainer('div', centered, {
+    let menu = createContainer('div', {
         display: 'flex',
         listStyleType: 'none',
-        width: '1170px',
     });
     let altMenu = createText('div', '\u{1f4de} <b>Call Us</b>&nbsp;&nbsp;&nbsp; SUPPORT: 1800 555 5555&nbsp;&nbsp;&nbsp; OFFICE:+1 (281) 555 5555', descriptionStyle, {
         width: '100%',
@@ -212,11 +211,12 @@ let createHeader = (header) => {
         fontSize: '20px',
     });
     setChildren(menu, [
-        menuItem('HOME'), menuItem('ABOUT'), menuItem('SERVICES'), 
-        menuItem('TECHNOLOGY'), menuItem('NEWS & MEDIA'), menuItem('PAGES'),
+        menuItem('HOME'), menuItem('ABOUT'), menuItem('PRODUCT & SERVICES'), 
+        menuItem('TECHNOLOGY'), menuItem('NEWS & MEDIA'), menuItem('INVESTORS'),
+        menuItem('PUBLICATIONS'), menuItem('SUSTAINABILITY'), 
         menuItem('CAREERS'), menuItem('CONTACT'), altMenu
     ]);
-    setChildren(navbar, [menu]);
+    setChildren(navbar, [expandingDiv(), menu, expandingDiv()]);
     setChildren(header, [logoTopInfo, navbar, altMenu]);
     let checkWidth = () => {
         contact.style.display = 'flex';
@@ -243,11 +243,21 @@ createHeader(header);
  * Home slider section
  */
 let createHomeSlider = (section) => {
-    section.style.position = 'relative';
-    let backgroundImage = createImage(sliderBackgroundImage, {
+    Object.assign(section.style, {
+        position: 'relative',
         width: '100%',
-        height: 'auto',
-        filter: 'brightness(60%)',
+        height: '50dvh',
+        maxHeight: '1100px',
+        overflow: 'hidden',
+    });
+    let backgroundImage = createImage(sliderBackgroundImage, {
+        filter: 'brightness(70%) saturate(70%)',
+        objectFit: 'cover',
+        position: 'absolute',
+        transform: 'translate(-50%, -50%)',
+        top: '50%',
+        left: '50%',
+        width: '100dvw',
     });
     let overlay = createContainer('div', {
         position: 'absolute',
@@ -256,21 +266,24 @@ let createHomeSlider = (section) => {
         width: '100%',
         transform: 'translate(0%, -50%)',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         color: 'white',
         flexDirection: 'column',
         fontFamily: 'Arial',
+        padding: '15%',
     });
-    let bigText = createText('h2', 'Slider Header', {
-        fontSize: '50px',
+    let bigText = createText('h2', 'Targeting High Impact Exploration For The Offshore Industry', {
+        fontSize: '40px',
         margin: '0 0 30px',
+        maxWidth: '600px',
     });
-    let smallText = createText('p', 'slider description', {
-        fontSize: '20px',
+    let smallText = createText('p', 'Advanced analysis, risk assessment, and efficient resource allocation to maximize the chances of successful exploration and development.', {
+        fontSize: '18px',
         margin: '0 0 40px',
+        maxWidth: '600px',
     });
-    let button = createButton('KNOW MORE', buttonDefault);
+    let button = createButton('LEARN MORE', buttonDefault, {
+        width: '150px',
+    });
     setChildren(overlay, [bigText, smallText, button]);
     setChildren(section, [backgroundImage, overlay]);
 }
@@ -302,13 +315,13 @@ let createHomeCompany = (section) => {
     let title = createText('h2', 'THE COMPANY', miniTitle, {
         width: '130px',
     });
-    let p1 = createText('h4', 'Interactively empower diverse imperatives after prospective convergence.', {
+    let p1 = createText('h4', 'Collaboratively develop comprehensive solutions through shared goals and objectives.', {
         color: 'blue',
         fontSize: '20px',
         fontWeight: 'bold',
         lineHeight: '1.4',
     });
-    let p2 = createText('p', 'Assertively productize efficient partnerships through customer directed supply chains. Continually maintain process-centric catalysts for change via backward compatible value.', descriptionStyle);
+    let p2 = createText('p', 'Deepwater Energy Partners is dedicated to building strong, collaborative relationships to deliver innovative and sustainable energy solutions. We focus on meeting customer needs by optimizing our supply chain and driving industry advancements.', descriptionStyle);
     let button = createButton('READ OUR MISSION', buttonDefault, {
         backgroundColor: '#093eb6',
         color: 'white',
@@ -358,14 +371,19 @@ let createHomeCEO = (section) => {
         minWidth: '400px',
         padding: '45px 15px',
     });
-    let title = createText('h2', 'WORD FROM CEO', miniTitle, {
+    let title = createText('h2', 'OUR LEADERSHIP', miniTitle, {
         width: '145px',
     });
-    let p1 = createText('p', 'Proactively incubate enterprise total linkage without sustainable leadership skills. Monotonectally strategize user-centric interfaces whereas low-risk high-yield materials. Efficiently syndicate web-enabled portals for principle centered partnerships.', descriptionStyle);
-    let p2 = createText('p', 'Proactively whiteboard revolutionary processes after scalable testing procedures. Holisticly reinvent seamless after business.', descriptionStyle);
+    let subtitle = createText('h4', 'A MESSAGE FROM OUR CEO', {
+        fontSize: '20px', 
+        color: '#093eb6',
+        fontWeight: 'bold',
+        lineHeight: '1.4',
+    });
+    let p1 = createText('p', 'At Deepwater Energy Partners, we are committed to being at the forefront of the offshore energy industry. Our focus is on developing innovative solutions that not only meet the world\'s growing energy demands but also prioritize sustainability and operational efficiency. By harnessing cutting-edge technology and fostering strong partnerships, we are dedicated to creating a cleaner, more resilient energy future. Our team of experts is passionate about pushing the boundaries of offshore exploration and production, while always upholding the highest standards of safety and environmental responsibility.', descriptionStyle);
     let signature = createImage(ceoSignature);
     let ceoName = createText('p', 'Gregory Walker, CEO');
-    setChildren(description, [title, p1, p2, signature, ceoName]);
+    setChildren(description, [title, subtitle, p1, signature, ceoName]);
     setChildren(container, [ceoImg, description]);
     setChildren(section, [container]);
 
@@ -420,9 +438,9 @@ let makeHomeServices = (section) => {
         gap: '20px',
         maxWidth: 'calc(100% - 100px)',
     });
-    let s1 = serviceBlock(service1ImgSrc, 'TECHNOLOGY & INNOVATION', 'Professionally drive clicks-and-mortar web readiness after progressive e-commerce. Dramatically unleash cross functional.');
-    let s2 = serviceBlock(service2ImgSrc, 'OUR OPERATIONS', 'Energistically productize wireless mindshare for emerging experiences. Mycardinate enabled alignments and magnetic scenarios.');
-    let s3 = serviceBlock(service3ImgSrc, 'SOCIAL RESPONSIBILITY', 'Globally incubate principle-centered e-markets with standards compliant catalysts for change. Efficiently extend highly efficient products.');
+    let s1 = serviceBlock(service1ImgSrc, 'TECHNOLOGY & INNOVATION', 'Our experienced team drives offshore exploration and production through cutting-edge technology and data-driven solutions.');
+    let s2 = serviceBlock(service2ImgSrc, 'OUR OPERATIONS', 'We deliver safe, efficient, and sustainable offshore energy solutions through innovative exploration, development, and production.');
+    let s3 = serviceBlock(service3ImgSrc, 'SOCIAL RESPONSIBILITY', 'We are committed to operating responsibly, protecting the environment, and supporting the communities where we work.');
     setChildren(container, [s1, s2, s3]);
     setChildren(section, [container]);
     let checkWidth = () => {
