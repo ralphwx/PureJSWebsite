@@ -327,7 +327,7 @@ let createHomeCEO = (section) => {
         padding: '15px',
         gap: '60px',
     });
-    let ceoImg = createImage(ceo, {
+    let ceoImg = createImage(ceoImgSrc, {
         width: '474px',
         height: 'auto',
         padding: '0px 15px',
@@ -499,7 +499,10 @@ let createFooter = (footer) => {
         maxWidth: '360px',
         margin: '25px',
     });
-    let footerLogoImg = createImage(footerLogo);
+    let footerLogoImg = createImage(footerLogo, {
+        width: '65%',
+        height: 'auto',
+    });
     let footerAbout = createText('p', 'Collaboratively deliver partnerships progressive alignments. Assertively premier supply chains before emerging solutions. Monetize high-payoff action items before wireless internal or organic sources exceptional action items.', {
         lineHeight: 1.68,
     });
