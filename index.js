@@ -284,9 +284,13 @@ createHomeSlider(homeSlider);
 let createHomeCompany = (section) => {
     section.style.padding = '80px 0';
     section.style.display = 'flex';
-    let container = createContainer('div', centered, flexWrapContainer, {
+    let container = createContainer('div', centered, {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: '15px',
         gap: '30px',
+        maxWidth: 'calc(100% - 30px)',
     });
     let description = createContainer('div', {
         display: 'flex',
@@ -315,6 +319,19 @@ let createHomeCompany = (section) => {
     illustration.style.maxHeight = '370px';
     setChildren(container, [description, illustration]);
     setChildren(section, [container]);
+
+    let checkWidth = () => {
+        illustration.style.display = 'block';
+        illustrationWidth = illustration.offsetWidth;
+        descriptionWidth = description.offsetWidth;
+        containerWidth = container.offsetWidth;
+        if(illustrationWidth + descriptionWidth > containerWidth) {
+            illustration.style.display = 'none';
+        }
+    };
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
 }
 createHomeCompany(homeCompany);
 
@@ -323,9 +340,13 @@ createHomeCompany(homeCompany);
  */
 let createHomeCEO = (section) => {
     section.style.display = 'flex';
-    let container = createContainer('div', centered, flexWrapContainer, {
+    let container = createContainer('div', centered, {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: '15px',
         gap: '60px',
+        maxWidth: 'calc(100% - 30px)',
     });
     let ceoImg = createImage(ceoImgSrc, {
         width: '474px',
@@ -347,6 +368,19 @@ let createHomeCEO = (section) => {
     setChildren(description, [title, p1, p2, signature, ceoName]);
     setChildren(container, [ceoImg, description]);
     setChildren(section, [container]);
+
+    let checkWidth = () => {
+        ceoImg.style.display = 'block';
+        imgWidth = ceoImg.offsetWidth;
+        descriptionWidth = description.offsetWidth;
+        containerWidth = container.offsetWidth;
+        if(imgWidth + descriptionWidth > containerWidth) {
+            ceoImg.style.display = 'none';
+        }
+    };
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
 }
 createHomeCEO(homeCeo);
 
@@ -378,16 +412,34 @@ let serviceBlock = (imgSrc, title, description) => {
 }
 
 let makeHomeServices = (section) => {
-    let container = createContainer('div', centered, flexWrapContainer, {
+    let container = createContainer('div', centered, {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: '50px',
         gap: '20px',
+        maxWidth: 'calc(100% - 100px)',
     });
     let s1 = serviceBlock(service1ImgSrc, 'TECHNOLOGY & INNOVATION', 'Professionally drive clicks-and-mortar web readiness after progressive e-commerce. Dramatically unleash cross functional.');
     let s2 = serviceBlock(service2ImgSrc, 'OUR OPERATIONS', 'Energistically productize wireless mindshare for emerging experiences. Mycardinate enabled alignments and magnetic scenarios.');
     let s3 = serviceBlock(service3ImgSrc, 'SOCIAL RESPONSIBILITY', 'Globally incubate principle-centered e-markets with standards compliant catalysts for change. Efficiently extend highly efficient products.');
     setChildren(container, [s1, s2, s3]);
     setChildren(section, [container]);
+    let checkWidth = () => {
+        s2.style.display = 'flex';
+        s3.style.display = 'flex';
+        overflowWidth = s1.offsetWidth + s2.offsetWidth + s3.offsetWidth;
+        containerWidth = container.offsetWidth;
+        if(overflowWidth > containerWidth) {
+            s2.style.display = 'none';
+            s3.style.display = 'none';
+        }
+    }
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
 }
+
 makeHomeServices(homeServices);
 
 /**
