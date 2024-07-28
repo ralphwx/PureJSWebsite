@@ -1128,11 +1128,22 @@ let createFooter = (footer) => {
         maxWidth: '100%',
         padding: '0 15px',
         display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        gap: '15px',
     });
     let copyrightLeft = createText('div', 
-        'Copyright \u00a9 2016 Deepwater Energy Partners. All rights reserved.')
-    let copyrightRight = createText('div', 'Terms of Use \t Privacy Policy');
-    setChildren(copyrightWrapper, [copyrightLeft, expandingDiv(), copyrightRight]);
+        'Copyright \u00a9 2024 Deepwater Energy Partners. All rights reserved.' , {
+        flex: 1,
+        textAlign: 'center',
+        whiteSpace: 'nowrap',
+    })
+    let copyrightRight = createText('div', 'Terms of Use \t Privacy Policy &nbsp; | &nbsp Design by Empire Creative', {
+        flex: 1,
+        textAlign: 'center',
+        whiteSpace: 'nowrap',
+    });
+    setChildren(copyrightWrapper, [copyrightLeft, copyrightRight]);
     setChildren(copyright, [copyrightWrapper]);
     setChildren(footer, [prefooter, infoBar, copyright]);
 };
