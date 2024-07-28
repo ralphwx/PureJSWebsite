@@ -863,6 +863,7 @@ let newsBlock = (imgSrc, month, day, title, author, department) => {
     let output = createContainer('div', {
         backgroundColor: 'white',
         flex: 1,
+        maxWidth: '400px',
     });
     let thumbnail = createImage(imgSrc, {
         width: '100%',
@@ -932,6 +933,18 @@ let createNews = (section) => {
     });
     setChildren(container, [title, subtitle, newsBlockContainer, vSpace('50px'), readButton]);
     setChildren(section, [container]);
+
+    let checkWidth = () => {
+        news1.style.display = 'block';
+        news2.style.display = 'block';
+        news3.style.display = 'block';
+        let width = newsBlockContainer.offsetWidth;
+        if(width < 980) news3.style.display = 'none';
+        if(width < 650) news2.style.display = 'none';
+    }
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
+    checkWidth();
 }
 createNews(homeNews);
 
