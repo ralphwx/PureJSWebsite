@@ -857,6 +857,85 @@ let createPublications = (section) => {
 createPublications(homePublications);
 
 /**
+ * Create news section
+ */
+let newsBlock = (imgSrc, month, day, title, author, department) => {
+    let output = createContainer('div', {
+        backgroundColor: 'white',
+        flex: 1,
+    });
+    let thumbnail = createImage(imgSrc, {
+        width: '100%',
+        height: 'auto',
+    });
+    let dateBlock = createContainer('div', {
+        color: 'white',
+        backgroundColor: '#093eb6',
+        width: '50px',
+        position: 'absolute',
+        top: '5px',
+        right: '5px',
+    });
+    let monthDiv = createText('div', month, {
+        margin: '5px',
+        fontSize: '14px',
+    });
+    let dateDiv = createText('div', day, {
+        margin: '5px',
+        fontSize: '16px',
+        fontWeight: 'bold',
+    });
+    setChildren(dateBlock, [monthDiv, dateDiv]);
+    let titleDiv = createText('div', title, {
+        color: '#41454f',
+        fontSize: '20px',
+        fontWeight: 'bold',
+        margin: '30px 15px',
+    });
+    let descriptionText = 'By <a style=\'color: rgb(9, 62, 182)\'>' + author + '</a> in ' + department;
+    let descriptionDiv = createText('div', descriptionText, {
+        color: '#aeb3b7',
+        fontSize: '16px',
+        margin: '30px 15px',
+    });
+    setChildren(output, [thumbnail, dateBlock, titleDiv, descriptionDiv]);
+    return output;
+}
+
+let createNews = (section) => {
+    section.style.padding = '80px 0';
+    let container = createContainer('div', centered, {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    });
+    let title = createText('h2', 'NEWS AND MEDIA', miniTitle, {
+        width: '150px',
+    });
+    let subtitle = createText('h2', 'LATEST FROM OUR BLOG', {
+        color: '#093eb6',
+        fontSize: '40px',
+    });
+    let newsBlockContainer = createContainer('div', {
+        display: 'flex',
+        gap: '30px',
+        maxWidth: '1170px',
+    });
+    let news1 = newsBlock(news1ImgSrc, 'APR', '06', 'FUEL TRANSPORTATION AND RAILWAY RULES', 'Eduard Jones', 'Transportation');
+    let news2 = newsBlock(news2ImgSrc, 'MAY', '24', 'FIELD TRAINING SESSIONS FOR NEW EMPLOYEES', 'Melinda Chavez', 'Careers');
+    let news3 = newsBlock(news3ImgSrc, 'JUN', '17', 'A STUDY ON SUSTAINABILITY & ENVIRONMENTAL FACTORS', 'Jennifer Rose', 'Environment');
+    setChildren(newsBlockContainer, [news1, news2, news3]);
+    let readButton = createButton('READ THE BLOG', buttonDefault, {
+        color: 'white',
+        backgroundColor: '#093eb6',
+        width: '140px',
+    });
+    setChildren(container, [title, subtitle, newsBlockContainer, vSpace('50px'), readButton]);
+    setChildren(section, [container]);
+}
+createNews(homeNews);
+
+/**
  * Create footer
  */
 
