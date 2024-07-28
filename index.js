@@ -246,7 +246,7 @@ let createHomeSlider = (section) => {
     Object.assign(section.style, {
         position: 'relative',
         width: '100%',
-        height: '50dvh',
+        height: '65dvh',
         maxHeight: '1100px',
         overflow: 'hidden',
     });
@@ -421,9 +421,11 @@ let serviceBlock = (imgSrc, title, description) => {
         lineHeight: '1.4',
     });
     let descriptionDiv = createText('p', description, descriptionStyle);
-    let button = createButton('READ MORE', buttonDefault, {
-        fontSize: '14px',
-        width: '100px',
+    let button = createText('div', 'READ MORE', {
+        color: '#ffd426',
+        fontSize: '16px',
+        padding: '20px 0px',
+        fontWeight: 'bold',
     });
     setChildren(output, [image, titleDiv, descriptionDiv, button]);
     return output;
@@ -525,7 +527,7 @@ let prefooterBlock = (color, title, description) => {
         flex: 1,
     });
     let titleDiv = createText('h4', title);
-    let descDiv = createText('p', description);
+    let descDiv = createText('p', description, descriptionStyle);
     setChildren(output, [titleDiv, descDiv]);
     return output;
 };
@@ -545,11 +547,11 @@ let createFooter = (footer) => {
         flexWrap: 'wrap',
     });
     let prefooterLeft = prefooterBlock('#ffda43', 'HEAD OFFICE', 
-        'PO Box 16122, Collins Street West <br/>Victoria 8007 Australia');
+        'PO Box 16122, Collins Street West <br/>Houston, TX 77111 USA');
     let prefooterMid = prefooterBlock('#ffd426', 'CALL US',
-        'SUPPORT 1800 425 4646 <br/>OFFICE: +1 (253) 2587 220');
+        'SUPPORT 1800 555 5555 <br/>OFFICE: +1 (281) 555 5555');
     let prefooterRight = prefooterBlock('#ffd012', 'EMAIL US',
-        'hello@offshoreindustry.com <br/>sales@offshoreindustry.com');
+        'info@deepwaterenergy.com <br/>sales@deepwaterenergy.com');
     setChildren(prefooterWrapper, [prefooterLeft, prefooterMid, prefooterRight]);
     setChildren(prefooter, [prefooterWrapper]);
     let infoBar = createContainer('div', {
@@ -573,7 +575,7 @@ let createFooter = (footer) => {
         width: '65%',
         height: 'auto',
     });
-    let footerAbout = createText('p', 'Collaboratively deliver partnerships progressive alignments. Assertively premier supply chains before emerging solutions. Monetize high-payoff action items before wireless internal or organic sources exceptional action items.', {
+    let footerAbout = createText('p', 'Deepwater Energy Partners is committed to fostering strong, collaborative partnerships. We prioritize efficient supply chain management to support the development of innovative energy solutions.', {
         lineHeight: 1.68,
     });
     setChildren(about, [footerLogoImg, footerAbout]);
@@ -599,11 +601,11 @@ let createFooter = (footer) => {
         margin: '25px',
         maxWidth: '360px',
     });
-    let subscribeButton = createButton('SUBSCRIBE NOW!', buttonDefault, {
+    let subscribeButton = createButton('SUBSCRIBE NOW', buttonDefault, {
         width: 'auto',
     });
     setChildren(newsletter, [
-        createText('h2', 'NEWSLETTER', {color: '#fff'}),
+        createText('h2', 'SUBSCRIBE', {color: '#fff'}),
         createText('p', 'Subscribe to our newsletters to receive latest news and updates.'),
         createText('p', 'Enter your email', {backgroundColor: '#fff', padding: '10px', color: '#777'}),
         subscribeButton
@@ -625,7 +627,7 @@ let createFooter = (footer) => {
         display: 'flex',
     });
     let copyrightLeft = createText('div', 
-        'Copyright \u00a9 2016 Offshore Industries. All rights reserved.')
+        'Copyright \u00a9 2016 Deepwater Energy Partners. All rights reserved.')
     let copyrightRight = createText('div', 'Terms of Use \t Privacy Policy');
     setChildren(copyrightWrapper, [copyrightLeft, expandingDiv(), copyrightRight]);
     setChildren(copyright, [copyrightWrapper]);
