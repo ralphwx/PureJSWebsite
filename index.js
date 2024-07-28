@@ -1021,7 +1021,7 @@ let createFooter = (footer) => {
         backgroundColor: '#03153e'
     });
     let prefooter = createContainer('div', {
-        transform: 'translate(0, -50%)',
+        transform: 'translate(0, -73px)',
         display: 'flex',
         justifyContent: 'center',
         lineHeight: 1.4,
