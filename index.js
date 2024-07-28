@@ -561,9 +561,7 @@ let serviceOtherBlock = (imgSrc, title, description) => {
 
     let checkWidth = () => {
         descriptionContainer.style.display = 'block';
-        console.log(descriptionContainer.offsetWidth);
         if(descriptionContainer.offsetWidth < 160) {
-            console.log('hide!');
             descriptionContainer.style.display = 'none';
         }
     }
@@ -614,6 +612,91 @@ let makeServicesOther = (section) => {
 }
 makeServicesOther(homeServicesOther);
 
+/**
+ * Create testimonials
+ */
+let quoteBox = (quote, person, description) => {
+    let output = createContainer('div', {
+        maxWidth: '400px',
+        margin: '0 10px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        flex: 1,
+    });
+    let quoteContainer = createText('div', quote, centered, {
+        fontStyle: 'italic', 
+        fontSize: '20px', 
+        color: '#888',
+        backgroundColor: 'white',
+        padding: '20px',
+        lineHeight: 1.4,
+        maxWidth: '350px',
+        flex: '1',
+    });
+    let triangleContainer = createContainer('div', {
+        height: '25px',
+        backgroundColor: 'transparent',
+    });
+    let triangle = createContainer('div', centered, {
+        width: '0',
+        height: '0',
+        borderTop: '25px solid white',
+        borderRight: '25px solid transparent',
+        borderLeft: '25px solid transparent',
+    });
+    setChildren(triangleContainer, [triangle]);
+    let nameDiv = createText('h4', person, {
+        color: '#093eb6',
+        fontSize: '18px',
+        textAlign: 'center',
+    });
+    let descriptionDiv = createText('p', description, descriptionStyle, {
+        textAlign: 'center',
+    });
+    setChildren(output, [quoteContainer, triangleContainer, nameDiv, descriptionDiv]);
+    return output;
+}
+
+let createTestimonials = (section) => {
+    section.style.padding = '80px 0';
+    let titleDiv = createText('h2', 'DON\'T TAKE OUR WORD', centered, miniTitle, {
+         width: '200px',
+    });
+    let subtitleDiv = createText('h2', 'CLIENT TESTIMONIALS', {
+        fontSize: '40px',
+        color: '#093eb6',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    });
+    let quoteContainer = createContainer('div', {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        overflow: 'hidden',
+    });
+    let quote1 = quoteBox('Deepwater Energy Partners has been an invaluable asset. Their expertise in offshore exploration has been instrumental in identifying and developing profitable projects. Their commitment to safety and environmental responsibility is evident in their operations, and their collaborative approach has fostered a strong partnership.', 'James Sim', 'Marketing Lead, XYZ Chemicals');
+    let quote2 = quoteBox('We were impressed with Deepwater Energy Partners\' ability to deliver results on time and within budget. Their innovative solutions and cutting-edge technology have significantly enhanced our offshore operations. Their team\'s deep industry knowledge and problem-solving skills have made them a trusted partner.', 'Christina Smith', 'Divisional Manager, Oilcorp Inc.');
+    let quote3 = quoteBox('Deepwater Energy Partners has exeeded our expectations in every aspect of our project. Their focus on sustainability and their dedication to building long-term relationships with clients is commendable. Their team\'s expertise in navigating complex regulatory environments has been essential to the success of our venture', 'Simon Hernandez', 'Founder & CEO, Marine Engineering');
+    setChildren(quoteContainer, [quote1, quote2, quote3]);
+    setChildren(section, [titleDiv, subtitleDiv, quoteContainer]);
+
+    let checkWidth = () => {
+        quote2.style.display = 'flex';
+        quote3.style.display = 'flex';
+        let screenWidth = window.innerWidth;
+        if(screenWidth < 967) {
+            quote3.style.display = 'none';
+        }
+        if(screenWidth < 700) {
+            quote2.style.display = 'none';
+        }
+    }
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
+}
+createTestimonials(homeTestimonials);
 /**
  * Create footer
  */
