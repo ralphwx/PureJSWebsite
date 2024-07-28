@@ -216,13 +216,13 @@ let createHeader = (header) => {
         textAlign: 'center',
         fontFamily: 'Arial',
         padding: '20px',
-        fontSize: '20px',
+        fontSize: '14px',
     });
     setChildren(menu, [
         menuItem('HOME'), menuItem('ABOUT'), menuItem('PRODUCT & SERVICES'), 
         menuItem('TECHNOLOGY'), menuItem('NEWS & MEDIA'), menuItem('INVESTORS'),
         menuItem('PUBLICATIONS'), menuItem('SUSTAINABILITY'), 
-        menuItem('CAREERS'), menuItem('CONTACT'), altMenu
+        menuItem('CAREERS'), menuItem('CONTACT'),
     ]);
     setChildren(navbar, [expandingDiv(), menu, expandingDiv()]);
     setChildren(header, [logoTopInfo, navbar, altMenu]);
@@ -259,13 +259,13 @@ let createHomeSlider = (section) => {
         overflow: 'hidden',
     });
     let backgroundImage = createImage(sliderBackgroundImage, {
-        filter: 'brightness(70%) saturate(70%)',
-        objectFit: 'cover',
+        filter: 'brightness(70%) sepia(25%)',
+        width: 'max(100%, 900px)',
+        height: 'auto',
         position: 'absolute',
-        transform: 'translate(-50%, -50%)',
+        left: '0',
         top: '50%',
-        left: '50%',
-        width: '100dvw',
+        transform: 'translate(0%, -50%)',
     });
     let overlay = createContainer('div', {
         position: 'absolute',
@@ -283,11 +283,13 @@ let createHomeSlider = (section) => {
         fontSize: '40px',
         margin: '0 0 30px',
         maxWidth: '600px',
+        width: '70%',
     });
     let smallText = createText('p', 'Advanced analysis, risk assessment, and efficient resource allocation to maximize the chances of successful exploration and development.', {
         fontSize: '18px',
         margin: '0 0 40px',
         maxWidth: '600px',
+        width: '70%',
     });
     let button = createButton('LEARN MORE', buttonDefault, {
         width: '150px',
@@ -637,6 +639,7 @@ let quoteBox = (quote, person, description) => {
     let quoteContainer = createContainer('div', centered, {
         position: 'relative',
         fontSize: '20px', 
+        fontFamily: 'Times New Roman',
         color: '#888',
         backgroundColor: 'white',
         padding: '30px',
