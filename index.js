@@ -624,13 +624,23 @@ let quoteBox = (quote, person, description) => {
         justifyContent: 'center',
         flex: 1,
     });
-    let quoteContainer = createText('div', quote, centered, {
-        fontStyle: 'italic', 
+    let quoteTextDiv = createText('div', quote, {
+        opacity: 0,
+    });
+    let quoteTextTop = createText('div', quote, {
+        position: 'absolute',
+        zIndex: 1,
+        top: 0,
+        left: 0,
+        padding: '30px',
+    });
+    let quoteContainer = createContainer('div', centered, {
+        position: 'relative',
         fontSize: '20px', 
         color: '#888',
         backgroundColor: 'white',
-        padding: '20px',
-        lineHeight: 1.4,
+        padding: '30px',
+        lineHeight: 1.68,
         maxWidth: '350px',
         flex: '1',
     });
@@ -645,6 +655,15 @@ let quoteBox = (quote, person, description) => {
         borderRight: '25px solid transparent',
         borderLeft: '25px solid transparent',
     });
+    let bigQuoteMark = createText('div', '\u{201c}', {
+        position: 'absolute',
+        top: '-20px',
+        left: '20px',
+        fontSize: '100px',
+        color: '#fff3cb',
+        fontWeight: 'bold',
+        zIndex: '0',
+    });
     setChildren(triangleContainer, [triangle]);
     let nameDiv = createText('h4', person, {
         color: '#093eb6',
@@ -654,6 +673,7 @@ let quoteBox = (quote, person, description) => {
     let descriptionDiv = createText('p', description, descriptionStyle, {
         textAlign: 'center',
     });
+    setChildren(quoteContainer, [bigQuoteMark, quoteTextDiv, quoteTextTop]);
     setChildren(output, [quoteContainer, triangleContainer, nameDiv, descriptionDiv]);
     return output;
 }
