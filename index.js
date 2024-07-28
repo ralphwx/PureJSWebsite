@@ -864,6 +864,7 @@ let newsBlock = (imgSrc, month, day, title, author, department) => {
         backgroundColor: 'white',
         flex: 1,
         maxWidth: '400px',
+        position: 'relative',
     });
     let thumbnail = createImage(imgSrc, {
         width: '100%',
@@ -874,8 +875,8 @@ let newsBlock = (imgSrc, month, day, title, author, department) => {
         backgroundColor: '#093eb6',
         width: '50px',
         position: 'absolute',
-        top: '5px',
-        right: '5px',
+        top: '10px',
+        right: '10px',
     });
     let monthDiv = createText('div', month, {
         margin: '5px',
@@ -883,7 +884,7 @@ let newsBlock = (imgSrc, month, day, title, author, department) => {
     });
     let dateDiv = createText('div', day, {
         margin: '5px',
-        fontSize: '16px',
+        fontSize: '20px',
         fontWeight: 'bold',
     });
     setChildren(dateBlock, [monthDiv, dateDiv]);
@@ -983,7 +984,8 @@ let createPartners = (section) => {
     });
     let partnerContainer = createContainer('div', {
         display: 'flex',
-        maxWidth: '1170px',
+        width: '1170px',
+        maxWidth: '100%',
         gap: '20px',
         justifyContent: 'center',
     });
@@ -994,6 +996,20 @@ let createPartners = (section) => {
     setChildren(partnerContainer, [partner1, partner2, partner3, partner4]);
     setChildren(container, [titleDiv, partnerContainer, vSpace('80px')]);
     setChildren(section, [container]);
+
+    let checkWidth = () => {
+        partner1.style.display = 'block';
+        partner2.style.display = 'block';
+        partner3.style.display = 'block';
+        partner4.style.display = 'block';
+        let width = partnerContainer.offsetWidth;
+        if(width < 950) partner4.style.display = 'none';
+        if(width < 700) partner3.style.display = 'none';
+    }
+
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
+    checkWidth();
 }
 createPartners(homePartners);
 
