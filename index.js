@@ -57,6 +57,14 @@ let hSpace = (width) => {
     return output;
 }
 
+let vSpace = (height) => {
+    let output = createContainer('div', {
+        height: height,
+        width: '100%',
+    });
+    return output;
+}
+
 let centered = {
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -512,6 +520,99 @@ let makeStats = (section) => {
     setChildren(section, [container]);
 }
 makeStats(homeStats);
+
+/**
+ * Create home services other section
+ */
+let serviceOtherBlock = (imgSrc, title, description) => {
+    let output = createContainer('div', {
+        display: 'flex',
+        justifyContent: 'center',
+        width: 'calc(33.3% - 60px)',
+        height: '100px',
+        padding: '0 30px',
+    });
+    let imageContainer = createContainer('div', {
+        border: '2px solid #ffd426',
+        height: '78px',
+        width: '78px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexShrink: '0',
+        marginRight: '20px',
+        marginTop: '11px',
+        marginBottom: '11px',
+    });
+    let image = createImage(imgSrc);
+    let descriptionContainer = createContainer('div', {
+        width: 'calc(100% - 78px)',
+    });
+    let titleDiv = createText('h4', title, {
+        color: '#093eb6',
+        fontSize: '20px',
+        fontWeight: 'bold',
+        margin: '0 0 10px',
+    });
+    let descriptionDiv = createText('p', description, descriptionStyle);
+    setChildren(imageContainer, [image]);
+    setChildren(descriptionContainer, [titleDiv, descriptionDiv]);
+    setChildren(output, [imageContainer, descriptionContainer]);
+
+    let checkWidth = () => {
+        descriptionContainer.style.display = 'block';
+        console.log(descriptionContainer.offsetWidth);
+        if(descriptionContainer.offsetWidth < 160) {
+            console.log('hide!');
+            descriptionContainer.style.display = 'none';
+        }
+    }
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
+
+    return output;
+};
+
+let makeServicesOther = (section) => {
+    section.style.padding = '80px 0';
+    let container = createContainer('div', {
+        margin: '0px 80px',
+    });
+    let title = createText('h2', 'SERVICES', {
+        fontSize: '40px',
+        color: '#093eb6',
+        fontWeight: 'bold',
+        textAlign: 'center',
+    });
+    let subtitle = createText('h4', 'Deepwater Energy Partners Delivers Comprehensive Offshore Energy Solutions', {
+        fontSize: '20px',
+        color: '#4c4f54',
+        fontWeight: 'bold',
+        lineHeight: '1.4',
+        textAlign: 'center',
+    });
+    let row1 = createContainer('div', flexWrapContainer);
+    let row2 = createContainer('div', flexWrapContainer, {
+        margin: '80px 0',
+    });
+    let row3 = createContainer('div', flexWrapContainer);
+    let s1 = serviceOtherBlock(serviceIcon1ImgSrc, 'SHELL CHEMICALS', 'High-performance additives that enhance drilling fluid properties.');
+    let s2 = serviceOtherBlock(serviceIcon2ImgSrc, 'COMMERCIAL FUELS', 'Powering businesses with reliable, high-quality energy solutions.');
+    let s3 = serviceOtherBlock(serviceIcon3ImgSrc, 'AVIATION FUELS', 'Delivering high performance and reliability for safe and efficient flight.');
+    let s4 = serviceOtherBlock(serviceIcon4ImgSrc, 'LUBRICANTS', 'Optimize equipment performance and extend lifespan.');
+    let s5 = serviceOtherBlock(serviceIcon5ImgSrc, 'MARINE FUELS', 'Propelling vessels efficiently and reliably.');
+    let s6 = serviceOtherBlock(serviceIcon6ImgSrc, 'LIQUIFIED PETROLIUM GAS', 'A clean-burning, versatile energy source for homes and industries.');
+    let s7 = serviceOtherBlock(serviceIcon7ImgSrc, 'SHELL SULPHUR', 'High-purity, versatile industrial mineral with diverse applications.');
+    let s8 = serviceOtherBlock(serviceIcon8ImgSrc, 'SHELL TRADING', 'Optimizing global energy markets through strategic trading.');
+    let s9 = serviceOtherBlock(serviceIcon9ImgSrc, 'SHELL FOR SUPPLIERS', 'Reliable ways for suppliers to contribue to our energy solutions.');
+    setChildren(row1, [s1, s2, s3]);
+    setChildren(row2, [s4, s5, s6]);
+    setChildren(row3, [s7, s8, s9]);
+    setChildren(container, [title, subtitle, vSpace('50px'), row1, row2, row3]);
+    setChildren(section, [container]);
+}
+makeServicesOther(homeServicesOther);
 
 /**
  * Create footer
