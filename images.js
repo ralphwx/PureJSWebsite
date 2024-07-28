@@ -48,3 +48,7 @@ let news1ImgSrc = './images/news1.jpg';
 let news2ImgSrc = './images/news2.jpg';
 let news3ImgSrc = './images/news3.jpg';
 
+let partner1ImgSrc = './images/partner1.png';
+let partner2ImgSrc = './images/partner2.png';
+let partner3ImgSrc = './images/partner3.png';
+let partner4ImgSrc = './images/partner4.png';

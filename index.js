@@ -936,6 +936,55 @@ let createNews = (section) => {
 createNews(homeNews);
 
 /**
+ * Create partners
+ */
+
+let partnerImageBlock = (imgSrc) => {
+    let output = createContainer('div', {
+        border: '1px solid #f4f5f8',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '40px',
+        width: '160px',
+        padding: '30px',
+    });
+    let image = createImage(imgSrc, {
+        objectFit: 'contain',
+    });
+    setChildren(output, [image]);
+    return output;
+}
+
+let createPartners = (section) => {
+    section.style.padding = '80px 0';
+    let container = createContainer('div', {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    }); 
+    let titleDiv = createText('h2', 'OUR PARTNERS', {
+        color: '#093eb6',
+        fontSize: '40px',
+        marginBottom: '50px',
+    });
+    let partnerContainer = createContainer('div', {
+        display: 'flex',
+        maxWidth: '1170px',
+        gap: '20px',
+        justifyContent: 'center',
+    });
+    let partner1 = partnerImageBlock(partner1ImgSrc);
+    let partner2 = partnerImageBlock(partner2ImgSrc);
+    let partner3 = partnerImageBlock(partner3ImgSrc);
+    let partner4 = partnerImageBlock(partner4ImgSrc);
+    setChildren(partnerContainer, [partner1, partner2, partner3, partner4]);
+    setChildren(container, [titleDiv, partnerContainer, vSpace('80px')]);
+    setChildren(section, [container]);
+}
+createPartners(homePartners);
+
+/**
  * Create footer
  */
 
