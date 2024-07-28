@@ -258,7 +258,7 @@ let createHomeSlider = (section) => {
         maxHeight: '1100px',
         overflow: 'hidden',
     });
-    let backgroundImage = createImage(sliderBackgroundImage, {
+    let backgroundImage = createImage(sliderImgSrc, {
         filter: 'brightness(70%) sepia(25%)',
         width: 'max(100%, 900px)',
         height: 'auto',
