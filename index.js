@@ -717,6 +717,145 @@ let createTestimonials = (section) => {
     window.addEventListener('load', checkWidth);
 }
 createTestimonials(homeTestimonials);
+
+/**
+ * Create publications
+ */
+let panelHeading = (title, symbol) => {
+    let output = createContainer('div', {
+        padding: '20px',
+        paddingBottom: '10px',
+        border: '1px solid rgba(244, 244, 244, 0.8)',
+        display: 'flex',
+        flexWrap: 'nowrap',
+        alignContent: 'center',
+    });
+    let titleDiv = createText('div', title, {
+        color: '#093eb6',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        margin: '0',
+        padding: '0',
+    });
+    let symbolDiv = createText('div', symbol, {
+        color: '#dadcdd',
+        fontSize: '29px',
+        fontWeight: 'bold',
+    });
+    setChildren(output, [titleDiv, expandingDiv(), symbolDiv]);
+    return output;
+}
+
+let panelContent = (text) => {
+    return createText('p', text, descriptionStyle, {
+        padding: '20px',
+        border: '1px solid rgba(244, 244, 244, 0.8)',
+    });
+}
+
+let smallDownloadLink = (filename, size) => {
+    let output = createContainer('div', {
+        padding: '15px',
+        color: '#093eb6',
+        fontSize: '16px',
+        display: 'flex',
+        border: '1px solid #f4f5f8',
+        marginBottom: '1px',
+    });
+    let filenameDiv = createText('div', filename);
+    let sizeDiv = createText('div', size);
+    setChildren(output, [filenameDiv, expandingDiv(), sizeDiv]);
+    return output;
+};
+
+let createPublications = (section) => {
+    section.style.padding = '80px 0';
+    let container = createContainer('div', centered, {
+        display: 'flex',
+        justifyContent: 'center',
+        maxWidth: '1170px',
+        gap: '50px',
+    });
+    let panels = createContainer('div', {
+        flex: 1,
+    });
+    let h1 = panelHeading('Petrolium Engineering', '-');
+    let h2 = panelHeading('International Trade', '+');
+    let h3 = panelHeading('Chemicals and Refining', '+');
+    let text1 = panelContent('Deepwater Energy Partners is committed to building a robust and collaborative ecosystem within the offshore energy industry. We prioritize the development of strategic alliances to share knowledge, resources, and best practices. By fostering a culture of innovation and shared goals, we aim to create a network of industry leaders capable of tackling complex challenges and driving sustainable growth. Our focus on cultivating professional communities extends beyond internal operations. We actively seek opportunities to engage with external stakeholders, including government agencies, academic institutions, and other industry players.');
+    setChildren(panels, [h1, text1, h2, h3]);
+
+    let publicationsContainer = createContainer('div', {
+        flex: 1,
+        border: '1px solid #f4f5f8',
+    });
+    let publicationsDiv = createText('h2', 'Publications', {
+        backgroundColor: '#093eb6',
+        color: 'white',
+        padding: '25px',
+        marginTop: '0',
+    });
+    let linksBox = createContainer('div', {
+        padding: '10px 15px',
+    });
+    let bigDownloadLink = createContainer('div', {
+        padding: '10px 10px 10px 15px',
+        display: 'flex',
+        alignItems: 'center',
+        border: '1px solid #f4f5f8',
+    });
+    let pdfSymbol = createImage(pdfImgSrc, {
+        height: '40px',
+        width: 'auto',
+    });
+    let downloadText = createText('div', '&nbsp;Download PDF', {
+        color: '#093eb6',
+        fontSize: '20px',
+        fontWeight: 'bold',
+    });
+    let sizeText = createText('div', '1.5MB', {
+        fontSize: '12px',
+        fontWeight: 'bold',
+        color: '#677078',
+    });
+    setChildren(bigDownloadLink, [pdfSymbol, downloadText, expandingDiv(), sizeText]);
+    let otherDownloadsDiv = createText('div', 'Other Downloads', {
+        fontSize: '14px',
+        color: '#9ea6ae',
+    });
+    let annual = smallDownloadLink('Annual Report', '2.4 MB');
+    let sustainability = smallDownloadLink('Sustainability Report', '150 KB');
+    let statistical = smallDownloadLink('Statistical Report', '250 KB');
+    let energy = smallDownloadLink('Energy Outlook', '1.8 MB');
+    let chairman = smallDownloadLink('Chairman\'s Message', '550KB');
+    setChildren(linksBox, [
+        bigDownloadLink, 
+        vSpace('20px'),
+        otherDownloadsDiv,
+        vSpace('25px'),
+        annual,
+        sustainability, 
+        statistical,
+        energy,
+        chairman,
+    ]);
+    setChildren(publicationsContainer, [publicationsDiv, linksBox]);
+    setChildren(container, [panels, publicationsContainer]);
+    setChildren(section, [container]);
+
+    let checkWidth = () => {
+        publicationsContainer.style.display = 'block';
+        let width = panels.offsetWidth;
+        if(width < 350) {
+            publicationsContainer.style.display = 'none';
+        }
+    };
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    window.addEventListener('load', checkWidth);
+}
+createPublications(homePublications);
+
 /**
  * Create footer
  */

@@ -42,3 +42,4 @@ let serviceIcon6ImgSrc = './images/service-icon6.png';
 let serviceIcon7ImgSrc = './images/service-icon7.png';
 let serviceIcon8ImgSrc = './images/service-icon8.png';
 let serviceIcon9ImgSrc = './images/service-icon9.png';
+let pdfImgSrc = './images/pdf.png';
