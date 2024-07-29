@@ -5,6 +5,8 @@ def convert(filepath):
         prefix = 'data:image/png;base64,'
     elif 'jpg' in filepath or 'jpeg' in filepath: 
         prefix = 'data:image/jpeg;base64,'
+    elif 'webp' in filepath:
+        prefix = 'data:image/webp;base64,'
     with open(filepath, 'rb') as f:
         data = f.read()
         encoded = base64.b64encode(data).decode('utf-8')
@@ -20,7 +22,7 @@ with open('./images.js') as raw:
             end = len(line)
             if line[end - 1] == ';': end -= 1
             suffix = line[end - 5: end]
-            if not 'png' in suffix and not 'jpg' in suffix: 
+            if not 'png' in suffix and not 'jpg' in suffix and 'webp' not in suffix:
                 output.write(line)
                 output.write(';')
                 output.write('\n')
