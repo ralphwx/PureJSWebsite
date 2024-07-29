@@ -4,7 +4,7 @@
  * Get the HTML element where everything is rendered. Assumed to be at a div
  * with ID root for now.
  */
-let root = document.getElementById('root');
+let root = document.getElementById('div1');
 
 /**
  * Generic helper functions
@@ -871,7 +871,8 @@ let newsBlock = (imgSrc, month, day, title, author, department) => {
     });
     let thumbnail = createImage(imgSrc, {
         width: '100%',
-        height: 'auto',
+        aspectRatio: 1.5,
+        overflow: 'hidden',
     });
     let dateBlock = createContainer('div', {
         color: 'white',

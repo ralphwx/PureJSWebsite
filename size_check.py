@@ -2,9 +2,10 @@
 import os
 import base64
 
+directory = './images/'
 sizes = []
-for path in os.listdir('images'):
-    full_path = './images/' + path
+for path in os.listdir(directory):
+    full_path = directory + path
     with open(full_path, 'rb') as image_file:
         data = image_file.read()
         encoded = base64.b64encode(data).decode('utf-8')
