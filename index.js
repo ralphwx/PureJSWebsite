@@ -366,8 +366,7 @@ let createHomeCEO = (section) => {
     let container = createContainer('div', centered, {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        padding: '15px',
+        alignItems: 'flex-end',
         gap: '60px',
         maxWidth: 'calc(100% - 30px)',
     });
@@ -379,7 +378,7 @@ let createHomeCEO = (section) => {
     let description = createContainer('div', {
         width: '30dvw',
         minWidth: '400px',
-        padding: '45px 15px',
+        padding: '35px 15px',
     });
     let title = createText('h2', 'OUR LEADERSHIP', miniTitle, {
         width: '145px',
