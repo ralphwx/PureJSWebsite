@@ -1,0 +1,4 @@
+python3 convert_images.py
+cat images_converted.js index.js > combined.js
+python3 -m jsmin combined.js > combined_mini.js
+python3 remove_whitespace.py
