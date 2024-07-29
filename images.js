@@ -51,3 +51,5 @@ let partner1ImgSrc = './images/partner1.png';
 let partner2ImgSrc = './images/partner2.png';
 let partner3ImgSrc = './images/partner3.png';
 let partner4ImgSrc = './images/partner4.png';
+
+let socialsFooterImgSrc = './images/socials-footer.png';

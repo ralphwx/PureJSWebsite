@@ -1064,11 +1064,8 @@ let createFooter = (footer) => {
         paddingLeft: '20px',
         paddingRight: '20px',
         display: 'flex',
-        justifyContent: 'center',
-    });
-    let infoBarContentWrapper = createContainer('div', centered, {
-        display: 'inline-flex',
-        flexWrap: 'wrap',
+        flexDirection: 'column',
+        alignItems: 'center',
     });
     let about = createContainer('div', {
         maxWidth: '360px',
@@ -1081,7 +1078,11 @@ let createFooter = (footer) => {
     let footerAbout = createText('p', 'Deepwater Energy Partners is committed to fostering strong, collaborative partnerships. We prioritize efficient supply chain management to support the development of innovative energy solutions.', {
         lineHeight: 1.68,
     });
-    setChildren(about, [footerLogoImg, footerAbout]);
+    let footerSocials = createImage(socialsFooterImgSrc, {
+        width: '70%',
+        height: 'auto',
+    });
+    setChildren(about, [footerLogoImg, footerAbout, footerSocials]);
     let links = createContainer('div', {margin: '25px'});
     setChildren(links, [
         createText('h2', 'QUICK LINKS', {color: '#ffffff'}),
@@ -1113,9 +1114,49 @@ let createFooter = (footer) => {
         createText('p', 'Enter your email', {backgroundColor: '#fff', padding: '10px', color: '#777'}),
         subscribeButton
     ]);
-    setChildren(infoBarContentWrapper, [about, links, services, newsletter]);
-    setChildren(infoBar, [infoBarContentWrapper]);
 
+    let formatInfoBar = () => {
+        //remove all children from infoBar, then re-render it
+        while(infoBar.firstChild) {
+            infoBar.removeChild(infoBar.lastChild);
+        }
+        let width = window.innerWidth;
+        if(width > 980) {
+            let infoBarContentWrapper = createContainer('div', centered, {
+                display: 'inline-flex',
+                flexWrap: 'wrap',
+            });
+            setChildren(infoBarContentWrapper, [
+                about, links, services, newsletter
+            ]);
+            setChildren(infoBar, [infoBarContentWrapper]);
+            return;
+        }
+        if(width > 760) {
+            let row1 = createContainer('div', {
+                display: 'flex',
+                flexWrap: 'wrap',
+            });
+            let row2 = createContainer('div', {
+                display: 'flex',
+                flexWrap: 'wrap',
+            });
+            setChildren(row1, [about, links]);
+            setChildren(row2, [services, newsletter]);
+            setChildren(infoBar, [row1, row2]);
+            return;
+        }
+        let row1 = createContainer('div', {
+            display: 'flex',
+            flexWrap: 'wrap',
+        });
+        setChildren(row1, [links, services]);
+        setChildren(infoBar, [row1, about]);
+    }
+
+    formatInfoBar();
+    window.addEventListener('resize', formatInfoBar);
+    window.addEventListener('load', formatInfoBar);
     let copyright = createContainer('div', {
         backgroundColor: '#020e28',
         padding: '35px 0',
